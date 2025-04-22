@@ -39,6 +39,30 @@ main {
     padding: 2rem;
 }
 
+#intro {
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+    text-align: center;
+}
+
+#intro .logo {
+    max-width: 300px;
+    height: auto;
+    margin: 0 auto 1rem;
+    display: block;
+}
+
+#intro h2 {
+    margin: 0.5rem 0;
+    color: #333;
+}
+
+#intro p {
+    max-width: 800px;
+    margin: 0 auto;
+    color: #555;
+}
+
 #products, #cart {
     max-width: 1200px;
     margin: 0 auto;
