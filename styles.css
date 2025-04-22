@@ -29,6 +29,7 @@ header {
     width: 100%;
     padding: 0.5rem 0;
     margin-top: 0.5rem;
+    text-align: center; /* Center nav links */
 }
 
 .header-nav a {
