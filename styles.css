@@ -25,7 +25,6 @@ header {
 }
 
 .header-nav {
-    background: #000; /* Black background for nav */
     width: 100%;
     padding: 0.5rem 0;
     margin-top: 0.5rem;
@@ -33,7 +32,7 @@ header {
 }
 
 .header-nav a {
-    color: #fff; /* White text for nav links */
+    color: #003366; /* Match primary color for nav links */
     text-decoration: none;
     margin: 0 1rem;
     transition: color 0.3s ease;
@@ -255,7 +254,7 @@ footer a:hover {
     }
 
     .small-logo {
-        max-width: 150px; /* Slightly smaller on mobile */
+        max-width: 150px; /* Smaller on mobile */
     }
 
     .header-nav a {
