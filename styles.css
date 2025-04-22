@@ -1,88 +1,219 @@
-/* Import a clean, modern font from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
-
-/* Base styles for the body */
 body {
-    font-family: 'Roboto', sans-serif;
-    line-height: 1.6;
-    color: #333; /* Dark text for readability */
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    line-height: 1.6;
 }
 
-/* Headings with a bold weight for emphasis */
-h1, h2, h3, h4, h5, h6 {
-    font-weight: 700;
+header {
+    background: #fff !important; /* White background, enforced */
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Button styles with a primary color (blue) and hover effect */
-.btn {
-    background-color: #007bff; /* Primary color: blue */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-}
-
-.btn:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-}
-
-/* Secondary button with an accent color (teal) */
-.secondary-btn {
-    background-color: #17a2b8; /* Accent color: teal */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-}
-
-/* Card-like sections for a subtle TCG theme */
-.card-set {
-    background-color: #f8f9fa; /* Light gray background */
-    border: 1px solid #dee2e6;
-    border-radius: 5px;
-    padding: 20px;
-    margin-bottom: 20px;
-    transition: transform 0.3s ease;
-}
-
-.card-set:hover {
-    transform: translateY(-5px); /* Slight lift on hover */
-}
-
-/* Image styles with a fade-in animation */
-img {
-    width: 100%;
+.small-logo {
+    max-width: 200px; /* Larger logo size */
     height: auto;
+    display: block;
 }
 
-img.fade-in {
-    animation: fadeIn 1s ease-in;
+main {
+    padding: 2rem;
+}
+
+#intro, #invest-opportunity {
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+    text-align: center;
+}
+
+#intro h2, #invest-opportunity h2 {
+    margin: 0.5rem 0;
+    color: #333;
+}
+
+#intro p, #invest-opportunity p {
+    max-width: 800px;
+    margin: 0 auto;
+    color: #555;
+}
+
+#invest-opportunity a {
+    color: #333;
+    text-decoration: none;
+}
+
+#invest-opportunity a:hover {
+    color: #555;
+}
+
+#products, #cart, #contact {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#products h2, #cart h2, #contact h2 {
+    text-align: center;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.product {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.product img {
+    max-width: 200px;
+    max-height: 200px;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.product h3 {
+    margin: 0.5rem 0;
+}
+
+.product p {
+    color: #555;
+}
+
+button {
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 3px;
+    margin: 0.5rem;
+}
+
+button:hover {
+    background: #555;
+}
+
+#cart {
+    margin-top: 2rem;
+}
+
+#cart-items {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 5px;
+    min-height: 100px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.9rem;
+}
+
+.cart-item .quantity-decrease, .cart-item .quantity-increase {
+    width: 30px;
+    padding: 0.2rem;
+}
+
+.cart-item .remove-item {
+    background: #c00;
+}
+
+.cart-item .remove-item:hover {
+    background: #a00;
+}
+
+#cart-total {
+    font-weight: bold;
+    text-align: right;
+    margin: 1rem 0;
+}
+
+#clear-cart, #checkout {
+    display: inline-block;
+    margin: 0 0.5rem;
+}
+
+#contact {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+#contact p {
+    color: #555;
+}
+
+#contact a {
+    color: #333;
+    text-decoration: none;
+}
+
+#contact a:hover {
+    color: #555;
+}
+
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #ddd;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* Accessibility: Clear focus styles for links and buttons */
-a:focus, button:focus {
-    outline: 2px solid #17a2b8; /* Accent color for focus */
-    outline-offset: 2px;
-}
+@media (max-width: 600px) {
+    .cart-item {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
 
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {
-    body {
-        font-size: 16px; /* Slightly larger text for mobile */
+    .cart-item button {
+        margin: 0.2rem;
     }
-    h1 {
-        font-size: 24px; /* Smaller heading for mobile */
-    }
-    .btn {
-        padding: 8px 16px; /* Smaller buttons for mobile */
+
+    .small-logo {
+        max-width: 150px; /* Slightly smaller on mobile */
     }
 }
