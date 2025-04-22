@@ -11,37 +11,14 @@ header {
     padding: 1rem;
     text-align: center;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
-header h1 {
-    margin: 0.5rem 0;
-}
-
 .small-logo {
-    max-width: 80px; /* Small logo size */
+    max-width: 120px; /* Larger logo size */
     height: auto;
     display: block;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin: 0 1rem;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
-nav ul li a:hover {
-    color: #ddd;
 }
 
 main {
@@ -206,11 +183,6 @@ footer {
 }
 
 @media (max-width: 600px) {
-    nav ul li {
-        display: block;
-        margin: 0.5rem 0;
-    }
-
     .cart-item {
         flex-wrap: wrap;
         gap: 0.5rem;
