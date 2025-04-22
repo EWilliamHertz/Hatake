@@ -24,20 +24,29 @@ main {
     padding: 2rem;
 }
 
-#intro {
+#intro, #invest-opportunity {
     max-width: 1200px;
     margin: 0 auto 2rem;
     text-align: center;
 }
 
-#intro h2 {
+#intro h2, #invest-opportunity h2 {
     margin: 0.5rem 0;
     color: #333;
 }
 
-#intro p {
+#intro p, #invest-opportunity p {
     max-width: 800px;
     margin: 0 auto;
+    color: #555;
+}
+
+#invest-opportunity a {
+    color: #333;
+    text-decoration: none;
+}
+
+#invest-opportunity a:hover {
     color: #555;
 }
 
@@ -174,6 +183,19 @@ footer {
     position: relative;
     bottom: 0;
     width: 100%;
+}
+
+footer p {
+    margin: 0;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #ddd;
 }
 
 @keyframes fadeIn {
