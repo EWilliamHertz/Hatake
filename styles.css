@@ -54,13 +54,6 @@ main {
     text-align: center;
 }
 
-#intro .logo {
-    max-width: 300px;
-    height: auto;
-    margin: 0 auto 1rem;
-    display: block;
-}
-
 #intro h2 {
     margin: 0.5rem 0;
     color: #333;
@@ -72,12 +65,12 @@ main {
     color: #555;
 }
 
-#products, #cart {
+#products, #cart, #contact {
     max-width: 1200px;
     margin: 0 auto;
 }
 
-#products h2, #cart h2 {
+#products h2, #cart h2, #contact h2 {
     text-align: center;
 }
 
@@ -119,6 +112,7 @@ button {
     padding: 0.5rem 1rem;
     cursor: pointer;
     border-radius: 3px;
+    margin: 0.5rem;
 }
 
 button:hover {
@@ -142,10 +136,29 @@ button:hover {
     align-items: center;
     padding: 0.5rem 0;
     border-bottom: 1px solid #eee;
+    animation: fadeIn 0.3s ease-in;
 }
 
 .cart-item:last-child {
     border-bottom: none;
+}
+
+.cart-item button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.9rem;
+}
+
+.cart-item .quantity-decrease, .cart-item .quantity-increase {
+    width: 30px;
+    padding: 0.2rem;
+}
+
+.cart-item .remove-item {
+    background: #c00;
+}
+
+.cart-item .remove-item:hover {
+    background: #a00;
 }
 
 #cart-total {
@@ -154,9 +167,27 @@ button:hover {
     margin: 1rem 0;
 }
 
-#clear-cart {
-    display: block;
-    margin: 0 auto;
+#clear-cart, #checkout {
+    display: inline-block;
+    margin: 0 0.5rem;
+}
+
+#contact {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+#contact p {
+    color: #555;
+}
+
+#contact a {
+    color: #333;
+    text-decoration: none;
+}
+
+#contact a:hover {
+    color: #555;
 }
 
 footer {
@@ -167,4 +198,25 @@ footer {
     position: relative;
     bottom: 0;
     width: 100%;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+    nav ul li {
+        display: block;
+        margin: 0.5rem 0;
+    }
+
+    .cart-item {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .cart-item button {
+        margin: 0.2rem;
+    }
 }
