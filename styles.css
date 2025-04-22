@@ -42,9 +42,7 @@ main {
 #products {
     max-width: 1200px;
     margin: 0 auto;
-    
 }
-
 
 #products h2 {
     text-align: center;
@@ -65,12 +63,12 @@ main {
 }
 
 .product img {
-    max-width: 200px; /* Limits image width to 200 pixels */
-    max-height: 200px; /* Limits image height to 200 pixels */
-    width: auto; /* Ensures aspect ratio is maintained */
-    height: auto; /* Ensures aspect ratio is maintained */
-    display: block; /* Removes extra space below images */
-    margin: 0 auto; /* Centers images horizontally */
+    max-width: 200px;
+    max-height: 200px;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 .product h3 {
