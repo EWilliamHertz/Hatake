@@ -11,15 +11,18 @@
     <meta property="og:url" content="https://ewilliamhertz.github.io/Hatake/">
     <link rel="stylesheet" href="styles.css">
 </head>
-    <a href="index.html" class="active">Home</a>
 <body>
     <header>
         <img src="https://i.imgur.com/k526Wip.jpg" alt="Hatake TCG Logo" class="small-logo">
         <nav class="header-nav">
-            <a href="index.html">Home</a>
+            <a href="index.html" class="active">Home</a>
             <a href="about.html">About</a>
             <a href="invest.html">Invest</a>
         </nav>
+        <form id="search-form" class="search-form">
+            <input type="text" id="product-search" placeholder="Search products...">
+            <button type="submit" id="search-btn">Search</button>
+        </form>
     </header>
 
     <main>
@@ -27,22 +30,16 @@
             <h2>Welcome to Hatake TCG Merchandise</h2>
             <p>At Hatake TCG, we’re passionate about enhancing your trading card game experience. Our high-quality accessories, from sleek matte sleeves to durable deckboxes and stylish duffel bags, are designed for collectors and players who value both function and flair. Explore our collection and elevate your game!</p>
         </section>
-<section id="products">
-    <h2>Our Merchandise</h2>
-    <div id="product-controls">
-        <input type="text" id="product-search" placeholder="Search products...">
-        <select id="product-sort">
-            <option value="default">Sort: Default</option>
-            <option value="price-low">Price: Low to High</option>
-            <option value="price-high">Price: High to Low</option>
-        </select>
-    </div>
-    <div class="product-grid">
-        <!-- Existing products -->
-    </div>
 
         <section id="products">
             <h2>Our Merchandise</h2>
+            <div id="product-controls">
+                <select id="product-sort">
+                    <option value="default">Sort: Default</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                </select>
+            </div>
             <div class="product-grid">
                 <div class="product">
                     <img src="https://i.imgur.com/Kz10FCc.jpg" alt="Matte Sleeves">
@@ -51,7 +48,7 @@
                     <button class="add-to-cart" data-name="Matte Sleeves" data-price="8.90">Add to Cart</button>
                 </div>
                 <div class="product">
-                    <img src="images/top-loader.jpg" alt="35pt Top-Loader">
+                    <img src="https://via.placeholder.com/200" alt="35pt Top-Loader">
                     <h3>25x 35pt Top-Loader</h3>
                     <p>$3.00</p>
                     <button class="add-to-cart" data-name="25x 35pt Top-Loader" data-price="3.00">Add to Cart</button>
@@ -88,9 +85,9 @@
 
         <section id="invest-opportunity">
             <h2>Investment Opportunity</h2>
-            <p>Join our journey! </p>
-            <p>We’re seeking $3,500 for 10% equity in HatakeAB, a stock company revolutionizing TCG accessories. </p>
-            <p>With countless financial documents ready, we’re looking for a passionate part-owner. </p>
+            <p>Join our journey!</p>
+            <p>We’re seeking $3,500 for 10% equity in HatakeAB, a stock company revolutionizing TCG accessories.</p>
+            <p>With countless financial documents ready, we’re looking for a passionate part-owner.</p>
             <p><a href="invest.html">Learn more about investing</a>.</p>
         </section>
     </main>
@@ -99,5 +96,6 @@
         <p>© 2025 HatakeAB. All rights reserved. | <a href="invest.html">Invest</a></p>
     </footer>
     <script src="cart.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
