@@ -6,7 +6,7 @@ body {
 }
 
 header {
-    background: #fff; /* White background */
+    background: #fff !important; /* White background, enforced */
     padding: 1rem;
     text-align: center;
     display: flex;
@@ -15,7 +15,7 @@ header {
 }
 
 .small-logo {
-    max-width: 150px; /* Larger logo size */
+    max-width: 200px; /* Larger logo size */
     height: auto;
     display: block;
 }
@@ -189,5 +189,9 @@ footer {
 
     .cart-item button {
         margin: 0.2rem;
+    }
+
+    .small-logo {
+        max-width: 150px; /* Slightly smaller on mobile */
     }
 }
