@@ -95,3 +95,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateCartDisplay();
 });
+const products = document.querySelectorAll('.product');
+document.getElementById('product-search').addEventListener('input', (e) => {
+    const search = e.target.value.toLowerCase();
+    products.forEach(product => {
+        const name = product.querySelector('h3').textContent.toLowerCase();
+        product.style.display = name.includes(search) ? 'block' : 'none';
+    });
+});
+document.getElementById('product-sort').addEventListener('change', (e) => {
+    const sort = e.target.value;
+    const grid = document.querySelector('.product-grid');
+    const sorted = Array.from(products).sort((a, b) => {
+        const priceA = parseFloat(a.querySelector('p').textContent.replace('$', ''));
+        const priceB = parseFloat(b.querySelector('p').textContent.replace('$', ''));
+        return sort === 'price-low' ? priceA - priceB : sort === 'price-high' ? priceB - priceA : 0;
+    });
+    grid.innerHTML = '';
+    sorted.forEach(product => grid.appendChild(product));
+});
+
