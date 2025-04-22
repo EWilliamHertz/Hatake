@@ -13,7 +13,7 @@ header {
     padding: 1rem;
     text-align: center;
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Stack logo and nav vertically */
     align-items: center;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
 }
@@ -22,6 +22,24 @@ header {
     max-width: 200px; /* Larger logo size */
     height: auto;
     display: block;
+}
+
+.header-nav {
+    background: #000; /* Black background for nav */
+    width: 100%;
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+}
+
+.header-nav a {
+    color: #fff; /* White text for nav links */
+    text-decoration: none;
+    margin: 0 1rem;
+    transition: color 0.3s ease;
+}
+
+.header-nav a:hover {
+    color: #336699; /* Lighter blue on hover */
 }
 
 main {
@@ -39,10 +57,16 @@ main {
     color: #003366; /* Deep blue for headings */
 }
 
-#intro p, #our-journey p, #invest-opportunity p {
+#intro p, #invest-opportunity p {
     max-width: 800px;
     margin: 0 auto;
     color: #555;
+}
+
+#our-journey p {
+    margin: 0.5rem auto; /* Reduced margin for tighter spacing */
+    color: #555;
+    text-align: center; /* Center text */
 }
 
 #invest-opportunity a, #our-journey a {
@@ -231,6 +255,10 @@ footer a:hover {
 
     .small-logo {
         max-width: 150px; /* Slightly smaller on mobile */
+    }
+
+    .header-nav a {
+        margin: 0 0.5rem; /* Smaller margins on mobile */
     }
 }
 
