@@ -1,5 +1,8 @@
+/* Import Google Font: Roboto for a modern look */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', Arial, sans-serif; /* Use Roboto with Arial fallback */
     margin: 0;
     padding: 0;
     line-height: 1.6;
@@ -12,6 +15,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
 }
 
 .small-logo {
@@ -32,7 +36,7 @@ main {
 
 #intro h2, #invest-opportunity h2 {
     margin: 0.5rem 0;
-    color: #333;
+    color: #003366; /* Deep blue for headings */
 }
 
 #intro p, #invest-opportunity p {
@@ -42,12 +46,13 @@ main {
 }
 
 #invest-opportunity a {
-    color: #333;
+    color: #003366; /* Primary color for links */
     text-decoration: none;
+    transition: color 0.3s ease; /* Smooth color transition */
 }
 
 #invest-opportunity a:hover {
-    color: #555;
+    color: #336699; /* Lighter blue on hover */
 }
 
 #products, #cart, #contact {
@@ -57,6 +62,7 @@ main {
 
 #products h2, #cart h2, #contact h2 {
     text-align: center;
+    color: #003366; /* Consistent heading color */
 }
 
 .product-grid {
@@ -68,9 +74,14 @@ main {
 
 .product {
     border: 1px solid #ddd;
-    padding: 1rem;
+    padding: 1.5rem; /* Increased padding for better spacing */
     text-align: center;
     border-radius: 5px;
+    transition: box-shadow 0.3s ease; /* Smooth shadow transition */
+}
+
+.product:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow on hover */
 }
 
 .product img {
@@ -84,6 +95,7 @@ main {
 
 .product h3 {
     margin: 0.5rem 0;
+    color: #003366; /* Consistent color for product titles */
 }
 
 .product p {
@@ -91,17 +103,18 @@ main {
 }
 
 button {
-    background: #333;
+    background: #003366; /* Primary button color */
     color: #fff;
     border: none;
     padding: 0.5rem 1rem;
     cursor: pointer;
     border-radius: 3px;
     margin: 0.5rem;
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
 }
 
 button:hover {
-    background: #555;
+    background: #336699; /* Lighter blue on hover */
 }
 
 #cart {
@@ -113,6 +126,7 @@ button:hover {
     padding: 1rem;
     border-radius: 5px;
     min-height: 100px;
+    background-color: #f9f9f9; /* Light background for cart items */
 }
 
 .cart-item {
@@ -167,16 +181,17 @@ button:hover {
 }
 
 #contact a {
-    color: #333;
+    color: #003366; /* Match link color */
     text-decoration: none;
+    transition: color 0.3s ease; /* Smooth color transition */
 }
 
 #contact a:hover {
-    color: #555;
+    color: #336699; /* Lighter blue on hover */
 }
 
 footer {
-    background: #333;
+    background: #003366; /* Match footer to primary color */
     color: #fff;
     text-align: center;
     padding: 1rem;
@@ -192,6 +207,7 @@ footer p {
 footer a {
     color: #fff;
     text-decoration: none;
+    transition: color 0.3s ease; /* Smooth color transition */
 }
 
 footer a:hover {
@@ -216,4 +232,10 @@ footer a:hover {
     .small-logo {
         max-width: 150px; /* Slightly smaller on mobile */
     }
+}
+
+/* Focus styles for accessibility */
+button:focus, a:focus {
+    outline: 2px solid #336699;
+    outline-offset: 2px;
 }
