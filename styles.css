@@ -6,8 +6,7 @@ body {
 }
 
 header {
-    background: #333;
-    color: #fff;
+    background: #fff; /* White background */
     padding: 1rem;
     text-align: center;
     display: flex;
@@ -16,7 +15,7 @@ header {
 }
 
 .small-logo {
-    max-width: 120px; /* Larger logo size */
+    max-width: 150px; /* Larger logo size */
     height: auto;
     display: block;
 }
