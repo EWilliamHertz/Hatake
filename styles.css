@@ -28,30 +28,30 @@ main {
     padding: 2rem;
 }
 
-#intro, #invest-opportunity {
+#intro, #our-journey, #invest-opportunity {
     max-width: 1200px;
     margin: 0 auto 2rem;
     text-align: center;
 }
 
-#intro h2, #invest-opportunity h2 {
+#intro h2, #our-journey h2, #invest-opportunity h2 {
     margin: 0.5rem 0;
     color: #003366; /* Deep blue for headings */
 }
 
-#intro p, #invest-opportunity p {
+#intro p, #our-journey p, #invest-opportunity p {
     max-width: 800px;
     margin: 0 auto;
     color: #555;
 }
 
-#invest-opportunity a {
+#invest-opportunity a, #our-journey a {
     color: #003366; /* Primary color for links */
     text-decoration: none;
     transition: color 0.3s ease; /* Smooth color transition */
 }
 
-#invest-opportunity a:hover {
+#invest-opportunity a:hover, #our-journey a:hover {
     color: #336699; /* Lighter blue on hover */
 }
 
