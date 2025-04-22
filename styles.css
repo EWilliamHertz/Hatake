@@ -2,45 +2,81 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
 body {
-    font-family: 'Roboto', Arial, sans-serif; /* Use Roboto with Arial fallback */
+    font-family: 'Roboto', Arial, sans-serif;
     margin: 0;
     padding: 0;
     line-height: 1.6;
 }
 
 header {
-    background: #fff !important; /* White background, enforced */
+    background: #fff !important;
     padding: 1rem;
     text-align: center;
     display: flex;
-    flex-direction: column; /* Stack logo and nav vertically */
+    flex-direction: column;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .small-logo {
-    max-width: 200px; /* Larger logo size */
+    max-width: 200px;
     height: auto;
     display: block;
 }
 
 .header-nav {
-    background: #000; /* Black background for nav */
+    background: #000;
     width: 100%;
     padding: 0.5rem 0;
     margin-top: 0.5rem;
-    text-align: center; /* Center nav links */
+    text-align: center;
 }
 
 .header-nav a {
-    color: #fff; /* White text for nav links */
+    color: #fff;
     text-decoration: none;
     margin: 0 1rem;
     transition: color 0.3s ease;
 }
 
 .header-nav a:hover {
-    color: #336699; /* Lighter blue on hover */
+    color: #336699;
+}
+
+.header-nav a.active {
+    color: #336699;
+    font-weight: bold;
+}
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 1rem;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+#product-search {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-family: 'Roboto', Arial, sans-serif;
+    width: 70%;
+}
+
+#search-btn {
+    background: #003366;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
+#search-btn:hover {
+    background: #336699;
 }
 
 main {
@@ -55,7 +91,7 @@ main {
 
 #intro h2, #our-journey h2, #invest-opportunity h2 {
     margin: 0.5rem 0;
-    color: #003366; /* Deep blue for headings */
+    color: #003366;
 }
 
 #intro p, #invest-opportunity p {
@@ -65,19 +101,19 @@ main {
 }
 
 #our-journey p {
-    margin: 0.5rem auto; /* Reduced margin for tighter spacing */
+    margin: 0.5rem auto;
     color: #555;
-    text-align: center; /* Center text */
+    text-align: center;
 }
 
 #invest-opportunity a, #our-journey a {
-    color: #003366; /* Primary color for links */
+    color: #003366;
     text-decoration: none;
-    transition: color 0.3s ease; /* Smooth color transition */
+    transition: color 0.3s ease;
 }
 
 #invest-opportunity a:hover, #our-journey a:hover {
-    color: #336699; /* Lighter blue on hover */
+    color: #336699;
 }
 
 #products, #cart, #contact {
@@ -87,7 +123,21 @@ main {
 
 #products h2, #cart h2, #contact h2 {
     text-align: center;
-    color: #003366; /* Consistent heading color */
+    color: #003366;
+}
+
+#product-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+#product-sort {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-family: 'Roboto', Arial, sans-serif;
 }
 
 .product-grid {
@@ -99,28 +149,27 @@ main {
 
 .product {
     border: 1px solid #ddd;
-    padding: 1.5rem; /* Increased padding for better spacing */
+    padding: 1.5rem;
     text-align: center;
     border-radius: 5px;
-    transition: box-shadow 0.3s ease; /* Smooth shadow transition */
+    transition: box-shadow 0.3s ease;
 }
 
 .product:hover {
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow on hover */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .product img {
-    max-width: 200px;
-    max-height: 200px;
-    width: auto;
-    height: auto;
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
     display: block;
     margin: 0 auto;
 }
 
 .product h3 {
     margin: 0.5rem 0;
-    color: #003366; /* Consistent color for product titles */
+    color: #003366;
 }
 
 .product p {
@@ -128,18 +177,18 @@ main {
 }
 
 button {
-    background: #003366; /* Primary button color */
+    background: #003366;
     color: #fff;
     border: none;
     padding: 0.5rem 1rem;
     cursor: pointer;
     border-radius: 3px;
     margin: 0.5rem;
-    transition: background-color 0.3s ease; /* Smooth transition on hover */
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background: #336699; /* Lighter blue on hover */
+    background: #336699;
 }
 
 #cart {
@@ -151,7 +200,7 @@ button:hover {
     padding: 1rem;
     border-radius: 5px;
     min-height: 100px;
-    background-color: #f9f9f9; /* Light background for cart items */
+    background-color: #f9f9f9;
 }
 
 .cart-item {
@@ -206,17 +255,17 @@ button:hover {
 }
 
 #contact a {
-    color: #003366; /* Match link color */
+    color: #003366;
     text-decoration: none;
-    transition: color 0.3s ease; /* Smooth color transition */
+    transition: color 0.3s ease;
 }
 
 #contact a:hover {
-    color: #336699; /* Lighter blue on hover */
+    color: #336699;
 }
 
 footer {
-    background: #003366; /* Match footer to primary color */
+    background: #003366;
     color: #fff;
     text-align: center;
     padding: 1rem;
@@ -232,7 +281,7 @@ footer p {
 footer a {
     color: #fff;
     text-decoration: none;
-    transition: color 0.3s ease; /* Smooth color transition */
+    transition: color 0.3s ease;
 }
 
 footer a:hover {
@@ -245,25 +294,28 @@ footer a:hover {
 }
 
 @media (max-width: 600px) {
+    .search-form {
+        flex-direction: column;
+        align-items: center;
+    }
+    #product-search {
+        width: 100%;
+    }
     .cart-item {
         flex-wrap: wrap;
         gap: 0.5rem;
     }
-
     .cart-item button {
         margin: 0.2rem;
     }
-
     .small-logo {
-        max-width: 150px; /* Slightly smaller on mobile */
+        max-width: 150px;
     }
-
     .header-nav a {
-        margin: 0 0.5rem; /* Smaller margins on mobile */
+        margin: 0 0.5rem;
     }
 }
 
-/* Focus styles for accessibility */
 button:focus, a:focus {
     outline: 2px solid #336699;
     outline-offset: 2px;
