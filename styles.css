@@ -19,6 +19,18 @@ header {
     align-items: center;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
 }
+    #product-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+#product-search, #product-sort {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
 
 .small-logo {
     max-width: 200px; /* Larger logo size */
