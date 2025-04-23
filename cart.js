@@ -2,9 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let preOrders = JSON.parse(localStorage.getItem('hatakePreOrders')) || [];
 
-    // Initialize EmailJS with your User ID
+    // Initialize EmailJS with your Public Key (User ID)
     (function(){
-        emailjs.init("YOUR_EMAILJS_USER_ID"); // Replace with your EmailJS User ID
+        emailjs.init("Y394pQh4XZfrZd4GP");
     })();
 
     const saveCart = () => {
@@ -68,12 +68,34 @@ document.addEventListener('DOMContentLoaded', () => {
             total: total
         };
 
-        return emailjs.send('YOUR_EMAILJS_SERVICE_ID', 'YOUR_EMAILJS_TEMPLATE_ID', templateParams)
+        return emailjs.send("service_9wx14wb", "template_j9fc4ya", templateParams)
             .then(response => {
-                console.log('Email sent successfully:', response.status, response.text);
+                console.log('Pre-order email sent successfully:', response.status, response.text);
                 return true;
             }, error => {
-                console.error('Failed to send email:', error);
+                console.error('Failed to send pre-order email:', error);
+                return false;
+            });
+    };
+
+    const sendCheckoutEmail = (cartItems) => {
+        const cartTotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2);
+        const templateParams = {
+            cart_items: cartItems.map(item => ({
+                name: item.name,
+                quantity: item.quantity,
+                price: item.price.toFixed(2),
+                total: (item.price * item.quantity).toFixed(2)
+            })),
+            cart_total: cartTotal
+        };
+
+        return emailjs.send("service_9wx14wb", "template_592t939", templateParams)
+            .then(response => {
+                console.log('Checkout email sent successfully:', response.status, response.text);
+                return true;
+            }, error => {
+                console.error('Failed to send checkout email:', error);
                 return false;
             });
     };
@@ -166,12 +188,29 @@ document.addEventListener('DOMContentLoaded', () => {
         showModal('Cart cleared!');
     });
 
-    document.getElementById('checkout').addEventListener('click', () => {
+    document.getElementById('checkout').addEventListener('click', async () => {
         if (cart.length === 0) {
             showModal('Your cart is empty!');
             return;
         }
-        showModal('Please email your pre-order details to ewilliamhe@gmail.com to complete your purchase.');
+
+        // Send email with cart contents
+        const emailSent = await sendCheckoutEmail(cart);
+
+        // Show modal with updated message
+        let modalMessage = 'Checkout submitted!';
+        if (emailSent) {
+            modalMessage += ' We have notified ewilliamhe@gmail.com of your order.';
+        } else {
+            modalMessage += ' Failed to notify ewilliamhe@gmail.com. Please email them manually.';
+        }
+        modalMessage += ' You can also email your pre-order details to ewilliamhe@gmail.com to confirm your purchase.';
+        showModal(modalMessage);
+
+        // Optionally clear the cart after checkout
+        cart = [];
+        saveCart();
+        updateCartDisplay();
     });
 
     // Initial setup
