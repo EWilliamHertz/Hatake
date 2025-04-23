@@ -25,7 +25,7 @@ header {
 }
 
 .header-nav {
-    background: #000;
+    background: #fff;
     width: 100%;
     padding: 0.5rem 0;
     margin-top: 0.5rem;
@@ -33,7 +33,7 @@ header {
 }
 
 .header-nav a {
-    color: #fff;
+    color: #003366;
     text-decoration: none;
     margin: 0 1rem;
     transition: color 0.3s ease;
@@ -248,11 +248,12 @@ button:hover {
 
 #contact {
     margin-top: 2rem;
-    text-align: `center;
+    text-align: center;
 }
 
 #contact p {
     color: #555;
+    text-align: center;
 }
 
 #contact a {
