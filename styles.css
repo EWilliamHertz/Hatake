@@ -110,7 +110,7 @@ footer a {
     background-color: white;
     padding: 1em;
     border-radius: 5px;
-    box-shadow: 0 0 5 Bower: none;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
     cursor: pointer;
     position: relative;
     transition: transform 0.2s;
@@ -255,41 +255,6 @@ summary {
     font-weight: bold;
 }
 
-#featured-products {
-    text-align: center;
-    margin: 2em 0;
-}
-
-.carousel {
-    display: flex;
-    overflow-x: auto;
-    gap: 1em;
-    padding: 1em;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-}
-
-.carousel-item {
-    flex: 0 0 auto;
-    width: 250px;
-    background-color: white;
-    padding: 1em;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    scroll-snap-align: start;
-    text-align: center;
-}
-
-.carousel-item img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
-}
-
-.carousel-item h3, .carousel-item p {
-    margin: 0.5em 0;
-}
-
 /* Mobile-specific styles */
 @media (max-width: 600px) {
     .product-grid {
@@ -323,9 +288,5 @@ summary {
     .pre-order-email, .pre-order-quantity, .pre-order-form button {
         font-size: 16px;
         padding: 0.75em;
-    }
-
-    .carousel-item {
-        width: 200px;
     }
 }
