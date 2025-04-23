@@ -102,10 +102,10 @@
                 opacity: 1;
             }
         }
-        /* Ensure click works on mobile by preventing hover interference */
-        @media (hover: none) {
+        /* Disable hover on touch devices (including iPads) */
+        @media (hover: none), (hover: on-demand) {
             .product:hover .details {
-                opacity: 0;
+                opacity: 0 !important; /* Explicitly disable hover */
             }
         }
         /* Adjust button inside details to avoid overlap issues */
@@ -120,6 +120,20 @@
             cursor: pointer;
         }
         .details .add-to-cart:hover {
+            background: #1557b0;
+        }
+        /* Ensure the main add-to-cart button doesn't interfere */
+        .product-content .add-to-cart {
+            width: 100%;
+            margin-top: 10px;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .product-content .add-to-cart:hover {
             background: #1557b0;
         }
     </style>
@@ -159,12 +173,12 @@
                         <img src="https://i.imgur.com/Kz10FCc.jpg" alt="Matte Sleeves">
                         <h3>Matte Sleeves</h3>
                         <p>$8.90</p>
-                        <button class="add-to-cart" data-name="Matte Sleeves" data-price="8.90">Add to Cart</button>
+                        <button class="add-to-cart" data-name="Matte Sleeves" data-price="8.90" onclick="event.stopPropagation();">Add to Cart</button>
                     </div>
                     <div class="details">
                         <h4>Matte Sleeves</h4>
                         <p>Protect your cards with our premium matte sleeves, designed for a non-slip grip and vibrant clarity. Fits standard TCG cards (63x91mm), pack of 100.</p>
-                        <button class="add-to-cart" data-name="Matte Sleeves" data-price="8.90">Add to Cart</button>
+                        <button class="add-to-cart" data-name="Matte Sleeves" data-price="8.90" onclick="event.stopPropagation();">Add to Cart</button>
                     </div>
                 </div>
                 <div class="product" onclick="toggleDetails(this)">
@@ -172,12 +186,12 @@
                         <img src="/Hatake/images/top-loader.jpg" alt="35pt Top-Loader">
                         <h3>25x 35pt Top-Loader</h3>
                         <p>$3.00</p>
-                        <button class="add-to-cart" data-name="25x 35pt Top-Loader" data-price="3.00">Add to Cart</button>
+                        <button class="add-to-cart" data-name="25x 35pt Top-Loader" data-price="3.00" onclick="event.stopPropagation();">Add to Cart</button>
                     </div>
                     <div class="details">
                         <h4>25x 35pt Top-Loader</h4>
                         <p>Keep your valuable cards safe with our 35pt top-loaders, perfect for standard TCG cards. Pack of 25, rigid plastic for maximum protection.</p>
-                        <button class="add-to-cart" data-name="25x 35pt Top-Loader" data-price="3.00">Add to Cart</button>
+                        <button class="add-to-cart" data-name="25x 35pt Top-Loader" data-price="3.00" onclick="event.stopPropagation();">Add to Cart</button>
                     </div>
                 </div>
                 <div class="product" onclick="toggleDetails(this)">
@@ -185,12 +199,12 @@
                         <img src="https://i.imgur.com/QFzheaZ.jpg" alt="Deckbox">
                         <h3>PU Deckbox</h3>
                         <p>$30.00</p>
-                        <button class="add-to-cart" data-name="PU Deckbox" data-price="30.00">Add to Cart</button>
+                        <button class="add-to-cart" data-name="PU Deckbox" data-price="30.00" onclick="event.stopPropagation();">Add to Cart</button>
                     </div>
                     <div class="details">
                         <h4>PU Deckbox</h4>
                         <p>Store up to 160+ cards in our premium PU leather deckbox, featuring a magnetic closure and Hatake branding. Ideal for Commander decks.</p>
-                        <button class="add-to-cart" data-name="PU Deckbox" data-price="30.00">Add to Cart</button>
+                        <button class="add-to-cart" data-name="PU Deckbox" data-price="30.00" onclick="event.stopPropagation();">Add to Cart</button>
                     </div>
                 </div>
                 <div class="product" onclick="toggleDetails(this)">
@@ -198,12 +212,12 @@
                         <img src="https://i.imgur.com/xV7ikH1.jpg" alt="Duffel Bag">
                         <h3>Duffel Bag</h3>
                         <p>$30.00</p>
-                        <button class="add-to-cart" data-name="Duffel Bag" data-price="30.00">Add to Cart</button>
+                        <button class="add-to-cart" data-name="Duffel Bag" data-price="30.00" onclick="event.stopPropagation();">Add to Cart</button>
                     </div>
                     <div class="details">
                         <h4>Duffel Bag</h4>
                         <p>Carry your TCG gear in style with our 47*28*55cm duffel bag, featuring durable material and Hatake branding. Perfect for tournaments.</p>
-                        <button class="add-to-cart" data-name="Duffel Bag" data-price="30.00">Add to Cart</button>
+                        <button class="add-to-cart" data-name="Duffel Bag" data-price="30.00" onclick="event.stopPropagation();">Add to Cart</button>
                     </div>
                 </div>
             </div>
