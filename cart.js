@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let preOrders = JSON.parse(localStorage.getItem('hatakePreOrders')) || [];
 
-    // Initialize EmailJS with your Public Key (User ID)
+    // Initialize EmailJS with your Public Key (олу
+
     (function(){
         emailjs.init("Y394pQh4XZfrZd4GP");
     })();
@@ -16,8 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const updateCartDisplay = () => {
+        // Only update cart display on cart.html
         const cartItemsDiv = document.getElementById('cart-items');
         const cartTotalSpan = document.getElementById('cart-total');
+        if (!cartItemsDiv || !cartTotalSpan) return; // Skip if not on cart.html
+
         cartItemsDiv.innerHTML = '';
 
         if (cart.length === 0) {
@@ -49,12 +53,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const showModal = (message) => {
         const modal = document.getElementById('pre-order-modal');
         const modalMessage = document.getElementById('modal-message');
+        if (!modal || !modalMessage) return; // Skip if modal not present
         modalMessage.textContent = message;
         modal.style.display = 'block';
     };
 
     const closeModal = () => {
         const modal = document.getElementById('pre-order-modal');
+        if (!modal) return; // Skip if modal not present
         modal.style.display = 'none';
     };
 
@@ -110,8 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Modal close handlers
-        document.querySelector('.modal-close').addEventListener('click', closeModal);
-        document.querySelector('.modal-button').addEventListener('click', closeModal);
+        const modalClose = document.querySelector('.modal-close');
+        const modalButton = document.querySelector('.modal-button');
+        if (modalClose) modalClose.addEventListener('click', closeModal);
+        if (modalButton) modalButton.addEventListener('click', closeModal);
     };
 
     const handlePreOrderFormSubmit = async (e) => {
@@ -145,7 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
         preOrders.push({ email, name, quantity, price, date: new Date().toISOString() });
         saveCart();
         savePreOrders();
-        updateCartDisplay();
 
         // Send email to ewilliamhe@gmail.com
         const emailSent = await sendPreOrderEmail(email, name, quantity, price);
@@ -162,56 +169,66 @@ document.addEventListener('DOMContentLoaded', () => {
         form.reset();
     };
 
-    document.getElementById('cart-items').addEventListener('click', (e) => {
-        const index = parseInt(e.target.getAttribute('data-index'));
-        if (isNaN(index)) return;
+    // Only attach cart item listeners on cart.html
+    const cartItemsDiv = document.getElementById('cart-items');
+    if (cartItemsDiv) {
+        cartItemsDiv.addEventListener('click', (e) => {
+            const index = parseInt(e.target.getAttribute('data-index'));
+            if (isNaN(index)) return;
 
-        if (e.target.classList.contains('quantity-increase')) {
-            cart[index].quantity += 1;
-        } else if (e.target.classList.contains('quantity-decrease')) {
-            cart[index].quantity -= 1;
-            if (cart[index].quantity <= 0) {
+            if (e.target.classList.contains('quantity-increase')) {
+                cart[index].quantity += 1;
+            } else if (e.target.classList.contains('quantity-decrease')) {
+                cart[index].quantity -= 1;
+                if (cart[index].quantity <= 0) {
+                    cart.splice(index, 1);
+                }
+            } else if (e.target.classList.contains('remove-item')) {
                 cart.splice(index, 1);
             }
-        } else if (e.target.classList.contains('remove-item')) {
-            cart.splice(index, 1);
-        }
 
-        saveCart();
-        updateCartDisplay();
-    });
+            saveCart();
+            updateCartDisplay();
+        });
+    }
 
-    document.getElementById('clear-cart').addEventListener('click', () => {
-        cart = [];
-        saveCart();
-        updateCartDisplay();
-        showModal('Cart cleared!');
-    });
+    // Only attach clear cart and checkout listeners on cart.html
+    const clearCartButton = document.getElementById('clear-cart');
+    const checkoutButton = document.getElementById('checkout');
+    if (clearCartButton) {
+        clearCartButton.addEventListener('click', () => {
+            cart = [];
+            saveCart();
+            updateCartDisplay();
+            showModal('Cart cleared!');
+        });
+    }
+    if (checkoutButton) {
+        checkoutButton.addEventListener('click', async () => {
+            if (cart.length === 0) {
+                showModal('Your cart is empty!');
+                return;
+            }
 
-    document.getElementById('checkout').addEventListener('click', async () => {
-        if (cart.length === 0) {
-            showModal('Your cart is empty!');
-            return;
-        }
+            // Send email with cart contents
+            const emailSent = await sendCheckoutEmail(cart);
 
-        // Send email with cart contents
-        const emailSent = await sendCheckoutEmail(cart);
+            // Show modal with updated message
+            let modalMessage = 'Checkout submitted!';
+            if (emailSent) {
+                modalMessage += ' We have notified ewilliamhe@gmail.com of your order.';
+            } else {
+                modalMessage += ' Failed to notify ewilliamhe@gmail.com. Please email them manually.';
+            }
+            modalMessage += ' You can also email your pre-order details to ewilliamhe@gmail.com to confirm your purchase.';
+            showModal(modalMessage);
 
-        // Show modal with updated message
-        let modalMessage = 'Checkout submitted!';
-        if (emailSent) {
-            modalMessage += ' We have notified ewilliamhe@gmail.com of your order.';
-        } else {
-            modalMessage += ' Failed to notify ewilliamhe@gmail.com. Please email them manually.';
-        }
-        modalMessage += ' You can also email your pre-order details to ewilliamhe@gmail.com to confirm your purchase.';
-        showModal(modalMessage);
-
-        // Optionally clear the cart after checkout
-        cart = [];
-        saveCart();
-        updateCartDisplay();
-    });
+            // Clear the cart after checkout
+            cart = [];
+            saveCart();
+            updateCartDisplay();
+        });
+    }
 
     // Initial setup
     attachPreOrderListeners();
