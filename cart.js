@@ -1,3 +1,4 @@
+```javascript
 document.addEventListener('DOMContentLoaded', () => {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -36,28 +37,39 @@ document.addEventListener('DOMContentLoaded', () => {
         cartTotalSpan.textContent = `Total: $${total.toFixed(2)}`;
     };
 
-    document.querySelectorAll('.pre-order-btn').forEach(button => {
-        button.addEventListener('click', () => {
-            const name = button.getAttribute('data-name');
-            const price = parseFloat(button.getAttribute('data-price'));
-
-            if (!name || isNaN(price)) {
-                alert('Error: Invalid product data.');
-                return;
-            }
-
-            const existingItem = cart.find(item => item.name === name);
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cart.push({ name, price, quantity: 1 });
-            }
-
-            saveCart();
-            updateCartDisplay();
-            alert(`Added ${name} ($${price.toFixed(2)}) to pre-order cart! Email ewilliamhe@gmail.com to confirm your pre-order.`);
+    const attachPreOrderListeners = () => {
+        const buttons = document.querySelectorAll('.pre-order-btn');
+        console.log(`Found ${buttons.length} pre-order buttons`); // Debug: Check number of buttons
+        buttons.forEach(button => {
+            button.removeEventListener('click', handlePreOrderClick); // Prevent duplicate listeners
+            button.addEventListener('click', handlePreOrderClick);
         });
-    });
+    };
+
+    const handlePreOrderClick = (e) => {
+        e.stopPropagation(); // Prevent parent click events
+        const button = e.currentTarget;
+        const name = button.getAttribute('data-name');
+        const price = parseFloat(button.getAttribute('data-price'));
+        console.log(`Clicked Pre-Order for: ${name}, Price: ${price}`); // Debug: Log click event
+
+        if (!name || isNaN(price)) {
+            console.error('Invalid product data:', { name, price });
+            alert('Error: Invalid product data.');
+            return;
+        }
+
+        const existingItem = cart.find(item => item.name === name);
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cart.push({ name, price, quantity: 1 });
+        }
+
+        saveCart();
+        updateCartDisplay();
+        alert(`Added ${name} ($${price.toFixed(2)}) to pre-order cart! Email ewilliamhe@gmail.com to confirm your pre-order.`);
+    };
 
     document.getElementById('cart-items').addEventListener('click', (e) => {
         const index = parseInt(e.target.getAttribute('data-index'));
@@ -74,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
             cart.splice(index, 1);
         }
 
-        
         saveCart();
         updateCartDisplay();
     });
@@ -94,5 +105,11 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Please email your pre-order details to ewilliamhe@gmail.com to complete your purchase.');
     });
 
+    // Initial setup
+    attachPreOrderListeners();
     updateCartDisplay();
+
+    // Re-attach listeners after sort/filter (called from script.js)
+    window.reAttachCartListeners = attachPreOrderListeners;
 });
+```
