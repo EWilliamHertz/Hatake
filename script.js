@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setInterval(updateTimer, 1000);
     });
 
-    // Toggle details on click
+    // Toggle details on click and touch
     function toggleDetails(element) {
         document.querySelectorAll('.product').forEach(product => {
             if (product !== element) {
@@ -32,15 +32,34 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         element.classList.toggle('clicked');
+
+        // Focus on the email input in the details form after a slight delay
+        if (element.classList.contains('clicked')) {
+            setTimeout(() => {
+                const emailInput = element.querySelector('.details .pre-order-email');
+                if (emailInput) emailInput.focus();
+            }, 100);
+        }
     }
 
     // Expose toggleDetails to global scope for HTML onclick
     window.toggleDetails = toggleDetails;
 
-    // Prevent click on details from closing the overlay
+    // Prevent click and touch on details from closing the overlay
     document.querySelectorAll('.details').forEach(detail => {
         detail.addEventListener('click', (e) => {
             e.stopPropagation();
+        });
+        detail.addEventListener('touchstart', (e) => {
+            e.stopPropagation();
+        });
+    });
+
+    // Add touch event listeners to products for mobile compatibility
+    document.querySelectorAll('.product').forEach(product => {
+        product.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            toggleDetails(product);
         });
     });
 
@@ -58,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             filterProducts();
         });
-        
 
         searchInput.addEventListener('input', filterProducts);
 
