@@ -37,7 +37,8 @@
         }
         return gk_fileData[filename] || "";
         }
-        </script><!DOCTYPE html>
+</script>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -49,6 +50,67 @@
     <meta property="og:image" content="https://i.imgur.com/k526Wip.jpg">
     <meta property="og:url" content="https://ewilliamhertz.github.io/Hatake/">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Add styles for product details overlay */
+        .product {
+            position: relative;
+            cursor: pointer;
+        }
+        .details {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            z-index: 1;
+            font-size: 14px;
+            text-align: left;
+            overflow: auto;
+        }
+        .details h4 {
+            margin-top: 0;
+            font-size: 16px;
+        }
+        .details p {
+            margin: 5px 0;
+        }
+        /* Show details on click */
+        .product.active .details {
+            display: block;
+        }
+        /* Hover effect for desktop */
+        @media (hover: hover) and (pointer: fine) {
+            .product:hover .details {
+                display: block;
+            }
+        }
+        /* Ensure click works on mobile by preventing hover interference */
+        @media (hover: none) {
+            .product:hover .details {
+                display: none;
+            }
+        }
+        /* Adjust button inside details to avoid overlap issues */
+        .details .add-to-cart {
+            width: 100%;
+            margin-top: 10px;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .details .add-to-cart:hover {
+            background: #1557b0;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -80,29 +142,49 @@
                 </form>
             </div>
             <div class="product-grid">
-                <div class="product">
+                <div class="product" onclick="toggleDetails(this)">
                     <img src="https://i.imgur.com/Kz10FCc.jpg" alt="Matte Sleeves">
                     <h3>Matte Sleeves</h3>
                     <p>$8.90</p>
                     <button class="add-to-cart" data-name="Matte Sleeves" data-price="8.90">Add to Cart</button>
+                    <div class="details">
+                        <h4>Matte Sleeves</h4>
+                        <p>[Sample Text: Describe the matte sleeves here. For example: "Protect your cards with our premium matte sleeves, designed for a non-slip grip and vibrant clarity. Fits standard TCG cards (63x88mm), pack of 60."]</p>
+                        <button class="add-to-cart" data-name="Matte Sleeves" data-price="8.90">Add to Cart</button>
+                    </div>
                 </div>
-                <div class="product">
+                <div class="product" onclick="toggleDetails(this)">
                     <img src="/Hatake/images/top-loader.jpg" alt="35pt Top-Loader">
                     <h3>25x 35pt Top-Loader</h3>
                     <p>$3.00</p>
                     <button class="add-to-cart" data-name="25x 35pt Top-Loader" data-price="3.00">Add to Cart</button>
+                    <div class="details">
+                        <h4>25x 35pt Top-Loader</h4>
+                        <p>Keep your valuable cards safe with our 35pt top-loaders, perfect for standard TCG cards. Pack of 25, rigid plastic for maximum protection.</p>
+                        <button class="add-to-cart" data-name="25x 35pt Top-Loader" data-price="3.00">Add to Cart</button>
+                    </div>
                 </div>
-                <div class="product">
+                <div class="product" onclick="toggleDetails(this)">
                     <img src="https://i.imgur.com/QFzheaZ.jpg" alt="Deckbox">
                     <h3>PU Deckbox</h3>
                     <p>$30.00</p>
                     <button class="add-to-cart" data-name="PU Deckbox" data-price="30.00">Add to Cart</button>
+                    <div class="details">
+                        <h4>PU Deckbox</h4>
+                        <p>Store up to 160+ cards in our premium PU leather deckbox, featuring a magnetic closure and Hatake branding. Ideal for Commander decks.</p>
+                        <button class="add-to-cart" data-name="PU Deckbox" data-price="30.00">Add to Cart</button>
+                    </div>
                 </div>
-                <div class="product">
+                <div class="product" onclick="toggleDetails(this)">
                     <img src="https://i.imgur.com/xV7ikH1.jpg" alt="Duffel Bag">
                     <h3>Duffel Bag</h3>
                     <p>$30.00</p>
                     <button class="add-to-cart" data-name="Duffel Bag" data-price="30.00">Add to Cart</button>
+                    <div class="details">
+                        <h4>Duffel Bag</h4>
+                        <p>Carry your TCG gear in style with our 47*28*55cm duffel bag, featuring durable material and Hatake branding. Perfect for tournaments.</p>
+                        <button class="add-to-cart" data-name="Duffel Bag" data-price="30.00">Add to Cart</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -136,5 +218,25 @@
     </footer>
     <script src="cart.js"></script>
     <script src="script.js"></script>
+    <script>
+        // Toggle details on click
+        function toggleDetails(element) {
+            // Close all other open details
+            document.querySelectorAll('.product').forEach(product => {
+                if (product !== element) {
+                    product.classList.remove('active');
+                }
+            });
+            // Toggle the clicked product
+            element.classList.toggle('active');
+        }
+
+        // Prevent click on details from closing the overlay
+        document.querySelectorAll('.details').forEach(detail => {
+            detail.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        });
+    </script>
 </body>
 </html>
