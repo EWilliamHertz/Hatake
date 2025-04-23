@@ -74,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cart.splice(index, 1);
         }
 
+        
         saveCart();
         updateCartDisplay();
     });
