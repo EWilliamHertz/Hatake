@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             filterProducts();
         });
+        
 
         searchInput.addEventListener('input', filterProducts);
 
