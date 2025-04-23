@@ -2,6 +2,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let preOrders = JSON.parse(localStorage.getItem('hatakePreOrders')) || [];
 
+    // Initialize EmailJS with your User ID
+    (function(){
+        emailjs.init("YOUR_EMAILJS_USER_ID"); // Replace with your EmailJS User ID
+    })();
+
     const saveCart = () => {
         localStorage.setItem('cart', JSON.stringify(cart));
     };
@@ -53,6 +58,26 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.style.display = 'none';
     };
 
+    const sendPreOrderEmail = (email, name, quantity, price) => {
+        const total = (price * quantity).toFixed(2);
+        const templateParams = {
+            user_email: email,
+            product_name: name,
+            quantity: quantity,
+            price: price.toFixed(2),
+            total: total
+        };
+
+        return emailjs.send('YOUR_EMAILJS_SERVICE_ID', 'YOUR_EMAILJS_TEMPLATE_ID', templateParams)
+            .then(response => {
+                console.log('Email sent successfully:', response.status, response.text);
+                return true;
+            }, error => {
+                console.error('Failed to send email:', error);
+                return false;
+            });
+    };
+
     const attachPreOrderListeners = () => {
         const forms = document.querySelectorAll('.pre-order-form');
         console.log(`Found ${forms.length} pre-order forms`);
@@ -67,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.modal-button').addEventListener('click', closeModal);
     };
 
-    const handlePreOrderFormSubmit = (e) => {
+    const handlePreOrderFormSubmit = async (e) => {
         e.preventDefault();
         e.stopPropagation();
         const form = e.currentTarget;
@@ -100,8 +125,17 @@ document.addEventListener('DOMContentLoaded', () => {
         savePreOrders();
         updateCartDisplay();
 
-        // Show modal
-        showModal(`Added ${quantity} x ${name} ($${price.toFixed(2)} each) to your cart!`);
+        // Send email to ewilliamhe@gmail.com
+        const emailSent = await sendPreOrderEmail(email, name, quantity, price);
+
+        // Show modal with updated message
+        let modalMessage = `Added ${quantity} x ${name} ($${price.toFixed(2)} each) to your cart!`;
+        if (emailSent) {
+            modalMessage += ' We have notified ewilliamhe@gmail.com of your pre-order.';
+        } else {
+            modalMessage += ' Failed to notify ewilliamhe@gmail.com. Please email them manually.';
+        }
+        showModal(modalMessage);
         messageElement.textContent = 'Pre-order submitted! Check your cart.';
         form.reset();
     };
