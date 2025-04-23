@@ -235,6 +235,26 @@ footer a {
     margin-top: 1em;
 }
 
+.testimonial {
+    background-color: white;
+    padding: 1em;
+    margin: 1em 0;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+details {
+    margin: 0.5em 0;
+    padding: 0.5em;
+    background-color: white;
+    border-radius: 5px;
+}
+
+summary {
+    cursor: pointer;
+    font-weight: bold;
+}
+
 /* Mobile-specific styles */
 @media (max-width: 600px) {
     .product-grid {
@@ -262,11 +282,11 @@ footer a {
     }
 
     .pre-order-form {
-        touch-action: manipulation; /* Ensure touch events are handled properly */
+        touch-action: manipulation;
     }
 
     .pre-order-email, .pre-order-quantity, .pre-order-form button {
-        font-size: 16px; /* Ensure inputs are tappable */
+        font-size: 16px;
         padding: 0.75em;
     }
 }
