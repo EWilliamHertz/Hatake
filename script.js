@@ -69,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        
         sortSelect.addEventListener('change', () => {
             const sortValue = sortSelect.value;
             let sortedProducts = [...products];
@@ -92,6 +91,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             productGrid.innerHTML = '';
             sortedProducts.forEach(product => productGrid.appendChild(product));
+            // Re-attach cart event listeners after re-rendering
+            if (window.reAttachCartListeners) {
+                window.reAttachCartListeners();
+            }
         });
     }
 });

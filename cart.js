@@ -1,4 +1,3 @@
-```javascript
 document.addEventListener('DOMContentLoaded', () => {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let preOrders = JSON.parse(localStorage.getItem('hatakePreOrders')) || [];
@@ -42,45 +41,30 @@ document.addEventListener('DOMContentLoaded', () => {
         cartTotalSpan.textContent = `Total: $${total.toFixed(2)}`;
     };
 
-    const attachPreOrderListeners = () => {
-        const buttons = document.querySelectorAll('.pre-order-btn');
-        const forms = document.querySelectorAll('.pre-order-form');
-        console.log(`Found ${buttons.length} pre-order buttons, ${forms.length} pre-order forms`);
+    const showModal = (message) => {
+        const modal = document.getElementById('pre-order-modal');
+        const modalMessage = document.getElementById('modal-message');
+        modalMessage.textContent = message;
+        modal.style.display = 'block';
+    };
 
-        buttons.forEach(button => {
-            button.removeEventListener('click', handlePreOrderClick);
-            button.addEventListener('click', handlePreOrderClick);
-        });
+    const closeModal = () => {
+        const modal = document.getElementById('pre-order-modal');
+        modal.style.display = 'none';
+    };
+
+    const attachPreOrderListeners = () => {
+        const forms = document.querySelectorAll('.pre-order-form');
+        console.log(`Found ${forms.length} pre-order forms`);
 
         forms.forEach(form => {
             form.removeEventListener('submit', handlePreOrderFormSubmit);
             form.addEventListener('submit', handlePreOrderFormSubmit);
         });
-    };
 
-    const handlePreOrderClick = (e) => {
-        e.stopPropagation();
-        const button = e.currentTarget;
-        const name = button.getAttribute('data-name');
-        const price = parseFloat(button.getAttribute('data-price'));
-        console.log(`Clicked Pre-Order for: ${name}, Price: ${price}`);
-
-        if (!name || isNaN(price)) {
-            console.error('Invalid product data:', { name, price });
-            alert('Error: Invalid product data.');
-            return;
-        }
-
-        const existingItem = cart.find(item => item.name === name);
-        if (existingItem) {
-            existingItem.quantity += 1;
-        } else {
-            cart.push({ name, price, quantity: 1 });
-        }
-
-        saveCart();
-        updateCartDisplay();
-        alert(`Added ${name} ($${price.toFixed(2)}) to pre-order cart! Email ewilliamhe@gmail.com to confirm your pre-order.`);
+        // Modal close handlers
+        document.querySelector('.modal-close').addEventListener('click', closeModal);
+        document.querySelector('.modal-button').addEventListener('click', closeModal);
     };
 
     const handlePreOrderFormSubmit = (e) => {
@@ -94,12 +78,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const messageElement = form.querySelector('.pre-order-message');
         console.log(`Form submitted for: ${name}, Price: ${price}, Email: ${email}, Quantity: ${quantity}`);
 
-        if (!name || isNaN(price) || !email || isNaN(quantity) || quantity < 1 || quantity > 5) {
+        // Validate inputs
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!name || isNaN(price) || !emailRegex.test(email) || isNaN(quantity) || quantity < 1 || quantity > 5) {
             console.error('Invalid form data:', { name, price, email, quantity });
             messageElement.textContent = 'Please enter a valid email and quantity (1-5).';
             return;
         }
 
+        // Update cart
         const existingItem = cart.find(item => item.name === name);
         if (existingItem) {
             existingItem.quantity += quantity;
@@ -107,11 +94,15 @@ document.addEventListener('DOMContentLoaded', () => {
             cart.push({ name, price, quantity });
         }
 
+        // Save pre-order
         preOrders.push({ email, name, quantity, price, date: new Date().toISOString() });
         saveCart();
         savePreOrders();
         updateCartDisplay();
-        messageElement.textContent = 'Pre-order submitted! Check your cart and email ewilliamhe@gmail.com to confirm.';
+
+        // Show modal
+        showModal(`Added ${quantity} x ${name} ($${price.toFixed(2)} each) to your cart!`);
+        messageElement.textContent = 'Pre-order submitted! Check your cart.';
         form.reset();
     };
 
@@ -138,15 +129,15 @@ document.addEventListener('DOMContentLoaded', () => {
         cart = [];
         saveCart();
         updateCartDisplay();
-        alert('Cart cleared!');
+        showModal('Cart cleared!');
     });
 
     document.getElementById('checkout').addEventListener('click', () => {
         if (cart.length === 0) {
-            alert('Your cart is empty!');
+            showModal('Your cart is empty!');
             return;
         }
-        alert('Please email your pre-order details to ewilliamhe@gmail.com to complete your purchase.');
+        showModal('Please email your pre-order details to ewilliamhe@gmail.com to complete your purchase.');
     });
 
     // Initial setup
@@ -156,4 +147,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // Expose for re-attachment after sort/filter
     window.reAttachCartListeners = attachPreOrderListeners;
 });
-```
