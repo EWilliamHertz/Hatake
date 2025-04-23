@@ -72,6 +72,8 @@
             font-size: 14px;
             text-align: left;
             overflow: auto;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out; /* Smooth fade transition */
         }
         .details h4 {
             margin-top: 0;
@@ -80,20 +82,28 @@
         .details p {
             margin: 5px 0;
         }
-        /* Show details on click */
-        .product.active .details {
+        /* Show details on click with class */
+        .product.clicked .details {
             display: block;
+            opacity: 1;
         }
         /* Hover effect for desktop */
         @media (hover: hover) and (pointer: fine) {
             .product:hover .details {
                 display: block;
+                opacity: 1;
+            }
+            /* Ensure hover doesn't interfere with clicked state */
+            .product.clicked:hover .details {
+                display: block;
+                opacity: 1;
             }
         }
         /* Ensure click works on mobile by preventing hover interference */
         @media (hover: none) {
             .product:hover .details {
                 display: none;
+                opacity: 0;
             }
         }
         /* Adjust button inside details to avoid overlap issues */
@@ -142,18 +152,18 @@
                 </form>
             </div>
             <div class="product-grid">
-                <div class="product" onclick="toggleDetails(this)">
+                <div class="product" onmouseenter="handleMouseEnter(this)" onmouseleave="handleMouseLeave(this)" onclick="toggleDetails(this)">
                     <img src="https://i.imgur.com/Kz10FCc.jpg" alt="Matte Sleeves">
                     <h3>Matte Sleeves</h3>
                     <p>$8.90</p>
                     <button class="add-to-cart" data-name="Matte Sleeves" data-price="8.90">Add to Cart</button>
                     <div class="details">
                         <h4>Matte Sleeves</h4>
-                        <p>[Sample Text: Describe the matte sleeves here. For example: "Protect your cards with our premium matte sleeves, designed for a non-slip grip and vibrant clarity. Fits standard TCG cards (63x88mm), pack of 60."]</p>
+                        <p>Protect your cards with our premium matte sleeves, designed for a non-slip grip and vibrant clarity. Fits standard TCG cards (63x91mm), pack of 100.</p>
                         <button class="add-to-cart" data-name="Matte Sleeves" data-price="8.90">Add to Cart</button>
                     </div>
                 </div>
-                <div class="product" onclick="toggleDetails(this)">
+                <div class="product" onmouseenter="handleMouseEnter(this)" onmouseleave="handleMouseLeave(this)" onclick="toggleDetails(this)">
                     <img src="/Hatake/images/top-loader.jpg" alt="35pt Top-Loader">
                     <h3>25x 35pt Top-Loader</h3>
                     <p>$3.00</p>
@@ -164,7 +174,7 @@
                         <button class="add-to-cart" data-name="25x 35pt Top-Loader" data-price="3.00">Add to Cart</button>
                     </div>
                 </div>
-                <div class="product" onclick="toggleDetails(this)">
+                <div class="product" onmouseenter="handleMouseEnter(this)" onmouseleave="handleMouseLeave(this)" onclick="toggleDetails(this)">
                     <img src="https://i.imgur.com/QFzheaZ.jpg" alt="Deckbox">
                     <h3>PU Deckbox</h3>
                     <p>$30.00</p>
@@ -175,7 +185,7 @@
                         <button class="add-to-cart" data-name="PU Deckbox" data-price="30.00">Add to Cart</button>
                     </div>
                 </div>
-                <div class="product" onclick="toggleDetails(this)">
+                <div class="product" onmouseenter="handleMouseEnter(this)" onmouseleave="handleMouseLeave(this)" onclick="toggleDetails(this)">
                     <img src="https://i.imgur.com/xV7ikH1.jpg" alt="Duffel Bag">
                     <h3>Duffel Bag</h3>
                     <p>$30.00</p>
@@ -224,11 +234,31 @@
             // Close all other open details
             document.querySelectorAll('.product').forEach(product => {
                 if (product !== element) {
-                    product.classList.remove('active');
+                    product.classList.remove('clicked');
                 }
             });
             // Toggle the clicked product
-            element.classList.toggle('active');
+            element.classList.toggle('clicked');
+        }
+
+        // Handle mouse enter for hover
+        function handleMouseEnter(element) {
+            // Hide details of all other products unless they are clicked
+            document.querySelectorAll('.product').forEach(product => {
+                if (product !== element && !product.classList.contains('clicked')) {
+                    product.querySelector('.details').style.display = 'none';
+                    product.querySelector('.details').style.opacity = '0';
+                }
+            });
+        }
+
+        // Handle mouse leave for hover
+        function handleMouseLeave(element) {
+            // Hide details unless the product is clicked
+            if (!element.classList.contains('clicked')) {
+                element.querySelector('.details').style.display = 'none';
+                element.querySelector('.details').style.opacity = '0';
+            }
         }
 
         // Prevent click on details from closing the overlay
