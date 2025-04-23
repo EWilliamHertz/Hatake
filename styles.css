@@ -6,10 +6,11 @@ body {
     margin: 0;
     padding: 0;
     line-height: 1.6;
+    background-color: #f4f4f4;
 }
 
 header {
-    background: #fff !important;
+    background: #fff;
     padding: 1rem;
     text-align: center;
     display: flex;
@@ -48,6 +49,50 @@ header {
     font-weight: bold;
 }
 
+main {
+    padding: 2rem;
+}
+
+#intro, #mission, #shop, #cart, #contact, #invest-opportunity, #our-journey {
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+    text-align: center;
+}
+
+#intro h2, #mission h2, #shop h2, #cart h2, #contact h2, #invest-opportunity h2, #our-journey h2 {
+    margin: 0.5rem 0;
+    color: #003366;
+}
+
+#intro p, #mission p, #shop p, #contact p, #invest-opportunity p, #our-journey p {
+    max-width: 800px;
+    margin: 0.5rem auto;
+    color: #555;
+}
+
+.cta-button {
+    display: inline-block;
+    background: #1a73e8;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    margin: 1rem 0;
+    transition: background 0.3s ease;
+}
+
+.cta-button:hover {
+    background: #1557b0;
+}
+
+#product-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
 .search-form {
     display: flex;
     gap: 10px;
@@ -78,61 +123,6 @@ header {
     background: #336699;
 }
 
-main {
-    padding: 2rem;
-}
-
-#intro, #our-journey, #invest-opportunity {
-    max-width: 1200px;
-    margin: 0 auto 2rem;
-    text-align: center;
-}
-
-#intro h2, #our-journey h2, #invest-opportunity h2 {
-    margin: 0.5rem 0;
-    color: #003366;
-}
-
-#intro p, #invest-opportunity p {
-    max-width: 800px;
-    margin: 0 auto;
-    color: #555;
-}
-
-#our-journey p {
-    margin: 0.5rem auto;
-    color: #555;
-    text-align: center;
-}
-
-#invest-opportunity a, #our-journey a {
-    color: #003366;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-#invest-opportunity a:hover, #our-journey a:hover {
-    color: #336699;
-}
-
-#products, #cart, #contact {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-#products h2, #cart h2, #contact h2 {
-    text-align: center;
-    color: #003366;
-}
-
-#product-controls {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-
 #product-sort {
     padding: 0.5rem;
     border: 1px solid #ddd;
@@ -149,15 +139,18 @@ main {
 }
 
 .product {
+    position: relative;
     border: 1px solid #ddd;
     padding: 1.5rem;
     text-align: center;
     border-radius: 5px;
+    background: #fff;
     transition: box-shadow 0.3s ease;
+    cursor: pointer;
 }
 
 .product:hover {
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .product img {
@@ -177,19 +170,80 @@ main {
     color: #555;
 }
 
-button {
-    background: #003366;
-    color: #fff;
-    border: none;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    border-radius: 3px;
-    margin: 0.5rem;
-    transition: background-color 0.3s ease;
+.product-content {
+    position: relative;
+    z-index: 1;
 }
 
-button:hover {
-    background: #336699;
+.details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    z-index: 2;
+    font-size: 14px;
+    text-align: left;
+    overflow: auto;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    display: block;
+}
+
+.details h4 {
+    margin-top: 0;
+    font-size: 16px;
+}
+
+.details p {
+    margin: 5px 0;
+}
+
+.product.clicked .details {
+    opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .product:hover .details {
+        opacity: 1;
+    }
+}
+
+@media (hover: none), (hover: on-demand) {
+    .product:hover .details {
+        opacity: 0 !important;
+    }
+}
+
+.countdown-timer {
+    font-size: 18px;
+    font-weight: bold;
+    color: #d32f2f;
+    margin: 10px 0;
+    background: #ffebee;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.pre-order-btn {
+    width: 100%;
+    margin-top: 10px;
+    background: #1a73e8;
+    lorsqu: pointer;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    transition: background 0.3s ease;
+}
+
+.pre-order-btn:hover {
+    background: #1557b0;
 }
 
 #cart {
@@ -244,25 +298,25 @@ button:hover {
 #clear-cart, #checkout {
     display: inline-block;
     margin: 0 0.5rem;
+    background: #003366;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 3px;
 }
 
-#contact {
-    margin-top: 2rem;
-    text-align: center;
+#clear-cart:hover, #checkout:hover {
+    background: #336699;
 }
 
-#contact p {
-    color: #555;
-    text-align: center;
-}
-
-#contact a {
+#contact a, #invest-opportunity a, #our-journey a {
     color: #003366;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
-#contact a:hover {
+#contact a:hover, #invest-opportunity a:hover, #our-journey a:hover {
     color: #336699;
 }
 

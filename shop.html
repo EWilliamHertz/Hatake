@@ -1,0 +1,168 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Hatake TCG Merchandise</title>
+    <meta name="description" content="Pre-order Hatake TCG's premium trading card game accessories, including duffel bags, top-loaders, matte sleeves, and binders.">
+    <meta property="og:title" content="Shop Hatake TCG Merchandise">
+    <meta property="og:description" content="Secure your pre-order for Hatake TCG's premium accessories. Available July and October 2025!">
+    <meta property="og:image" content="https://i.imgur.com/k526Wip.jpg">
+    <meta property="og:url" content="https://ewilliamhertz.github.io/Hatake/shop.html">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="https://i.imgur.com/k526Wip.jpg" alt="Hatake TCG Logo" class="small-logo">
+        <nav class="header-nav">
+            <a href="index.html">Home</a>
+            <a href="shop.html" class="active">Shop</a>
+            <a href="about.html">About</a>
+            <a href="invest.html">Invest</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="shop">
+            <h2>Pre-Order Our TCG Accessories</h2>
+            <p>Secure your Hatake TCG merchandise before our official launch! All products are available for pre-order, with shipping dates in July and October 2025.</p>
+            <div id="product-controls">
+                <select id="product-sort">
+                    <option value="default">Sort: Default</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                </select>
+                <form id="search-form" class="search-form">
+                    <input type="text" id="product-search" placeholder="Search products...">
+                    <button type="submit" id="search-btn">Search</button>
+                </form>
+            </div>
+            <div class="product-grid">
+                <div class="product" onclick="toggleDetails(this)">
+                    <div class="product-content">
+                        <img src="https://i.imgur.com/xV7ikH1.jpg" alt="Duffel Bag">
+                        <h3>Duffel Bag</h3>
+                        <p>$30.00</p>
+                        <div class="countdown-timer" data-target="2025-07-15T00:00:00">Loading...</div>
+                        <button class="pre-order-btn" data-name="Duffel Bag" data-price="30.00" onclick="event.stopPropagation();">Pre-Order Now</button>
+                    </div>
+                    <div class="details">
+                        <h4>Duffel Bag</h4>
+                        <p>Carry your TCG gear in style with our 47*28*55cm duffel bag. Durable, branded, and perfect for tournaments. Available July 2025.</p>
+                        <button class="pre-order-btn" data-name="Duffel Bag" data-price="30.00" onclick="event.stopPropagation();">Pre-Order Now</button>
+                    </div>
+                </div>
+                <div class="product" onclick="toggleDetails(this)">
+                    <div class="product-content">
+                        <img src="/Hatake/images/top-loader.jpg" alt="35pt Top-Loader">
+                        <h3>25x 35pt Top-Loader</h3>
+                        <p>$3.00</p>
+                        <div class="countdown-timer" data-target="2025-10-15T00:00:00">Loading...</div>
+                        <button class="pre-order-btn" data-name="25x 35pt Top-Loader" data-price="3.00" onclick="event.stopPropagation();">Pre-Order Now</button>
+                    </div>
+                    <div class="details">
+                        <h4>25x 35pt Top-Loader</h4>
+                        <p>Protect your cards with our rigid 35pt top-loaders. Pack of 25, ideal for standard TCG cards. Available October 2025.</p>
+                        <button class="pre-order-btn" data-name="25x 35pt Top-Loader" data-price="3.00" onclick="event.stopPropagation();">Pre-Order Now</button>
+                    </div>
+                </div>
+                <div class="product" onclick="toggleDetails(this)">
+                    <div class="product-content">
+                        <img src="/Hatake/images/top-loader.jpg" alt="130pt Top-Loader">
+                        <h3>10x 130pt Top-Loader</h3>
+                        <p>$3.50</p>
+                        <div class="countdown-timer" data-target="2025-10-15T00:00:00">Loading...</div>
+                        <button class="pre-order-btn" data-name="10x 130pt Top-Loader" data-price="3.50" onclick="event.stopPropagation();">Pre-Order Now</button>
+                    </div>
+                    <div class="details">
+                        <h4>10x 130pt Top-Loader</h4>
+                        <p>Extra-thick 130pt top-loaders for premium card protection. Pack of 10, fits standard TCG cards. Available October 2025.</p>
+                        <button class="pre-order-btn" data-name="10x 130pt Top-Loader" data-price="3.50" onclick="event.stopPropagation();">Pre-Order Now</button>
+                    </div>
+                </div>
+                <div class="product" onclick="toggleDetails(this)">
+                    <div class="product-content">
+                        <img src="https://i.imgur.com/Kz10FCc.jpg" alt="Matte Sleeves">
+                        <h3>66*91 Matte Sleeves, Black</h3>
+                        <p>$8.90</p>
+                        <div class="countdown-timer" data-target="2025-10-15T00:00:00">Loading...</div>
+                        <button class="pre-order-btn" data-name="66*91 Matte Sleeves, Black" data-price="8.90" onclick="event.stopPropagation();">Pre-Order Now</button>
+                    </div>
+                    <div class="details">
+                        <h4>66*91 Matte Sleeves, Black</h4>
+                        <p>Premium black matte sleeves with a non-slip grip. Fits standard TCG cards (66x91mm), pack of 100. Available October 2025.</p>
+                        <button class="pre-order-btn" data-name="66*91 Matte Sleeves, Black" data-price="8.90" onclick="event.stopPropagation();">Pre-Order Now</button>
+                    </div>
+                </div>
+                <div class="product" onclick="toggleDetails(this)">
+                    <div class="product-content">
+                        <img src="https://i.imgur.com/QFzheaZ.jpg" alt="Top-Loader Binder">
+                        <h3>12-Slot 480 Top-Loader Binder</h3>
+                        <p>$36.00</p>
+                        <div class="countdown-timer" data-target="2025-10-15T00:00:00">Loading...</div>
+                        <button class="pre-order-btn" data-name="12-Slot 480 Top-Loader Binder" data-price="36.00" onclick="event.stopPropagation();">Pre-Order Now</button>
+                    </div>
+                    <div class="details">
+                        <h4>12-Slot 480 Top-Loader Binder</h4>
+                        <p>Store up to 480 cards in our premium binder with side-loading pockets and a zipper. Branded and durable. Available October 2025.</p>
+                        <button class="pre-order-btn" data-name="12-Slot 480 Top-Loader Binder" data-price="36.00" onclick="event.stopPropagation();">Pre-Order Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cart">
+            <h2>Your Pre-Order Cart</h2>
+            <div id="cart-items"></div>
+            <p id="cart-total">Total: $0.00</p>
+            <button id="clear-cart">Clear Cart</button>
+            <button id="checkout">Checkout</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 HatakeAB. All rights reserved. | <a href="invest.html">Invest</a></p>
+    </footer>
+    <script src="cart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

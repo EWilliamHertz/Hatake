@@ -37,174 +37,25 @@
         }
         return gk_fileData[filename] || "";
         }
-</script>
-<!DOCTYPE html>
+        </script><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hatake TCG Merchandise</title>
-    <meta name="description" content="High-quality trading card game accessories from Hatake TCG, including matte sleeves, top-loaders, deckboxes, and duffel bags.">
-    <meta property="og:title" content="Hatake TCG Merchandise">
-    <meta property="og:description" content="Explore our collection of trading card game accessories designed for collectors and players.">
+    <title>Hatake TCG - Premium TCG Accessories</title>
+    <meta name="description" content="Hatake TCG, a startup crafting premium trading card game accessories. Pre-order our products launching October 15, 2025!">
+    <meta property="og:title" content="Hatake TCG - Premium TCG Accessories">
+    <meta property="og:description" content="Discover Hatake TCG, a startup revolutionizing TCG accessories. Pre-order now for our October 15, 2025 launch!">
     <meta property="og:image" content="https://i.imgur.com/k526Wip.jpg">
     <meta property="og:url" content="https://ewilliamhertz.github.io/Hatake/">
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Existing styles for product and overlay */
-        .product {
-            position: relative;
-            cursor: pointer;
-            width: 100%; /* Ensure consistent width for overlay */
-            max-width: 300px; /* Match your existing product width */
-        }
-        .product-content {
-            position: relative;
-            z-index: 1; /* Ensure content is below the overlay */
-        }
-        .details {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            color: white;
-            padding: 10px;
-            box-sizing: border-box;
-            border-radius: 5px;
-            z-index: 2; /* Overlay above product content */
-            font-size: 14px;
-            text-align: left;
-            overflow: auto;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out; /* Smooth fade transition */
-            display: block; /* Always block, controlled by opacity */
-        }
-        .details h4 {
-            margin-top: 0;
-            font-size: 16px;
-        }
-        .details p {
-            margin: 5px 0;
-        }
-        /* Show details on click with class */
-        .product.clicked .details {
-            opacity: 1;
-        }
-        /* Hover effect for desktop using pure CSS */
-        @media (hover: hover) and (pointer: fine) {
-            .product:hover .details {
-                opacity: 1;
-            }
-            /* Ensure hover works even when clicked */
-            .product.clicked:hover .details {
-                opacity: 1;
-            }
-        }
-        /* Disable hover on touch devices (including iPads) */
-        @media (hover: none), (hover: on-demand) {
-            .product:hover .details {
-                opacity: 0 !important; /* Explicitly disable hover */
-            }
-        }
-        /* Adjust button inside details to avoid overlap issues */
-        .details .add-to-cart {
-            width: 100%;
-            margin-top: 10px;
-            background: #1a73e8;
-            color: white;
-            border: none;
-            padding: 8px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .details .add-to-cart:hover {
-            background: #1557b0;
-        }
-        /* Ensure the main add-to-cart button doesn't interfere */
-        .product-content .add-to-cart {
-            width: 100%;
-            margin-top: 10px;
-            background: #1a73e8;
-            color: white;
-            border: none;
-            padding: 8px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .product-content .add-to-cart:hover {
-            background: #1557b0;
-        }
-        /* Styles for pre-order section */
-        #pre-order {
-            background: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            text-align: center;
-        }
-        #pre-order h2 {
-            margin-top: 0;
-            color: #333;
-        }
-        .pre-order-content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-        }
-        .pre-order-image img {
-            max-width: 100%;
-            border-radius: 5px;
-        }
-        .pre-order-details {
-            max-width: 400px;
-            text-align: left;
-        }
-        .countdown-timer {
-            font-size: 24px;
-            font-weight: bold;
-            color: #d32f2f;
-            margin: 10px 0;
-        }
-        .pre-order-form {
-            margin-top: 15px;
-        }
-        .pre-order-form input[type="email"],
-        .pre-order-form input[type="number"] {
-            padding: 8px;
-            margin: 5px 0;
-            width: 100%;
-            max-width: 300px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .pre-order-form button {
-            background: #1a73e8;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .pre-order-form button:hover {
-            background: #1557b0;
-        }
-        .pre-order-message {
-            margin-top: 10px;
-            color: #333;
-            font-style: italic;
-        }
-    </style>
 </head>
 <body>
     <header>
         <img src="https://i.imgur.com/k526Wip.jpg" alt="Hatake TCG Logo" class="small-logo">
         <nav class="header-nav">
             <a href="index.html" class="active">Home</a>
+            <a href="shop.html">Shop</a>
             <a href="about.html">About</a>
             <a href="invest.html">Invest</a>
         </nav>
@@ -212,198 +63,30 @@
 
     <main>
         <section id="intro">
-            <h2>Welcome to Hatake TCG Merchandise</h2>
-            <p>At Hatake TCG, we’re passionate about enhancing your trading card game experience. Our high-quality accessories, from sleek matte sleeves to durable deckboxes and stylish duffel bags, are designed for collectors and players who value both function and flair. Explore our collection and elevate your game!</p>
+            <h2>Welcome to Hatake TCG</h2>
+            <p>Hatake TCG is a passionate startup based in Falköping, Sweden, dedicated to elevating the trading card game experience. We’re crafting premium accessories—matte sleeves, top-loaders, deckboxes, and duffel bags—designed for collectors and players who demand quality and style.</p>
+            <p>Our first product samples are on their way and already pre-booked by excited TCG enthusiasts! We’re gearing up for our official launch on <strong>October 15, 2025</strong>, with a curated selection of products available for pre-order now.</p>
+            <a href="shop.html" class="cta-button">Pre-Order Now</a>
         </section>
 
-        <section id="pre-order">
-            <h2>Pre-Order Our Limited Duffel Bags!</h2>
-            <div class="pre-order-content">
-                <div class="pre-order-image">
-                    <img src="https://i.imgur.com/xV7ikH1.jpg" alt="Duffel Bag">
-                </div>
-                <div class="pre-order-details">
-                    <p>Be the first to own our Hatake Duffel Bag, perfect for carrying your TCG gear to tournaments. Only 25 units available—secure yours now for just $30!</p>
-                    <div class="countdown-timer" id="countdown-timer">Loading...</div>
-                    <form class="pre-order-form" id="pre-order-form">
-                        <input type="email" id="pre-order-email" placeholder="Your email address" required>
-                        <input type="number" id="pre-order-quantity" placeholder="Quantity (1-5)" min="1" max="5" required>
-                        <button type="submit">Pre-Order Now</button>
-                    </form>
-                    <p class="pre-order-message" id="pre-order-message"></p>
-                </div>
-            </div>
-        </section>
-
-        <section id="products">
-            <h2>Our Merchandise</h2>
-            <div id="product-controls">
-                <select id="product-sort">
-                    <option value="default">Sort: Default</option>
-                    <option value="price-low">Price: Low to High</option>
-                    <option value="price-high">Price: High to Low</option>
-                </select>
-                <form id="search-form" class="search-form">
-                    <input type="text" id="product-search" placeholder="Search products...">
-                    <button type="submit" id="search-btn">Search</button>
-                </form>
-            </div>
-            <div class="product-grid">
-                <div class="product" onclick="toggleDetails(this)">
-                    <div class="product-content">
-                        <img src="https://i.imgur.com/Kz10FCc.jpg" alt="Matte Sleeves">
-                        <h3>Matte Sleeves</h3>
-                        <p>$8.90</p>
-                        <button class="add-to-cart" data-name="Matte Sleeves" data-price="8.90" onclick="event.stopPropagation();">Add to Cart</button>
-                    </div>
-                    <div class="details">
-                        <h4>Matte Sleeves</h4>
-                        <p>Protect your cards with our premium matte sleeves, designed for a non-slip grip and vibrant clarity. Fits standard TCG cards (63x91mm), pack of 100.</p>
-                        <button class="add-to-cart" data-name="Matte Sleeves" data-price="8.90" onclick="event.stopPropagation();">Add to Cart</button>
-                    </div>
-                </div>
-                <div class="product" onclick="toggleDetails(this)">
-                    <div class="product-content">
-                        <img src="/Hatake/images/top-loader.jpg" alt="35pt Top-Loader">
-                        <h3>25x 35pt Top-Loader</h3>
-                        <p>$3.00</p>
-                        <button class="add-to-cart" data-name="25x 35pt Top-Loader" data-price="3.00" onclick="event.stopPropagation();">Add to Cart</button>
-                    </div>
-                    <div class="details">
-                        <h4>25x 35pt Top-Loader</h4>
-                        <p>Keep your valuable cards safe with our 35pt top-loaders, perfect for standard TCG cards. Pack of 25, rigid plastic for maximum protection.</p>
-                        <button class="add-to-cart" data-name="25x 35pt Top-Loader" data-price="3.00" onclick="event.stopPropagation();">Add to Cart</button>
-                    </div>
-                </div>
-                <div class="product" onclick="toggleDetails(this)">
-                    <div class="product-content">
-                        <img src="https://i.imgur.com/QFzheaZ.jpg" alt="Deckbox">
-                        <h3>PU Deckbox</h3>
-                        <p>$30.00</p>
-                        <button class="add-to-cart" data-name="PU Deckbox" data-price="30.00" onclick="event.stopPropagation();">Add to Cart</button>
-                    </div>
-                    <div class="details">
-                        <h4>PU Deckbox</h4>
-                        <p>Store up to 160+ cards in our premium PU leather deckbox, featuring a magnetic closure and Hatake branding. Ideal for Commander decks.</p>
-                        <button class="add-to-cart" data-name="PU Deckbox" data-price="30.00" onclick="event.stopPropagation();">Add to Cart</button>
-                    </div>
-                </div>
-                <div class="product" onclick="toggleDetails(this)">
-                    <div class="product-content">
-                        <img src="https://i.imgur.com/xV7ikH1.jpg" alt="Duffel Bag">
-                        <h3>Duffel Bag</h3>
-                        <p>$30.00</p>
-                        <button class="add-to-cart" data-name="Duffel Bag" data-price="30.00" onclick="event.stopPropagation();">Add to Cart</button>
-                    </div>
-                    <div class="details">
-                        <h4>Duffel Bag</h4>
-                        <p>Carry your TCG gear in style with our 47*28*55cm duffel bag, featuring durable material and Hatake branding. Perfect for tournaments.</p>
-                        <button class="add-to-cart" data-name="Duffel Bag" data-price="30.00" onclick="event.stopPropagation();">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="cart">
-            <h2>Your Cart</h2>
-            <div id="cart-items"></div>
-            <p id="cart-total">Total: $0.00</p>
-            <button id="clear-cart">Clear Cart</button>
-            <button id="checkout">Checkout</button>
+        <section id="mission">
+            <h2>Our Mission</h2>
+            <p>At Hatake, we aim to build a vibrant TCG community by offering high-quality, branded merchandise and fostering connections through events and partnerships. From our roots in Sweden, we’re planning to expand internationally and open a physical card shop in Alingsås by 2030.</p>
+            <p>Join us on this journey—whether as a customer, partner, or investor!</p>
+            <a href="invest.html" class="cta-button">Explore Investment Opportunities</a>
         </section>
 
         <section id="contact">
-            <h2>Contact Us</h2>
-            <p>Have questions or ready to place an order? Reach out to us!</p>
+            <h2>Get in Touch</h2>
+            <p>Questions or ready to join our community? Reach out!</p>
             <p>Email: <a href="mailto:ewilliamhe@gmail.com">ewilliamhe@gmail.com</a></p>
             <p>Follow us on <a href="https://x.com/hatakeTCG">X</a> for updates!</p>
-        </section>
-
-        <section id="invest-opportunity">
-            <h2>Investment Opportunity</h2>
-            <p>Join our journey!</p>
-            <p>We’re seeking $3,500 for 10% equity in HatakeAB, a stock company revolutionizing TCG accessories.</p>
-            <p>With countless financial documents ready, we’re looking for a passionate part-owner.</p>
-            <p><a href="invest.html">Learn more about investing</a>.</p>
         </section>
     </main>
 
     <footer>
         <p>© 2025 HatakeAB. All rights reserved. | <a href="invest.html">Invest</a></p>
     </footer>
-    <script src="cart.js"></script>
     <script src="script.js"></script>
-    <script>
-        // Toggle details on click
-        function toggleDetails(element) {
-            // Close all other open details
-            document.querySelectorAll('.product').forEach(product => {
-                if (product !== element) {
-                    product.classList.remove('clicked');
-                }
-            });
-            // Toggle the clicked product
-            element.classList.toggle('clicked');
-        }
-
-        // Prevent click on details from closing the overlay
-        document.querySelectorAll('.details').forEach(detail => {
-            detail.addEventListener('click', (e) => {
-                e.stopPropagation();
-            });
-        });
-
-        // Countdown timer for pre-order
-        function startCountdown() {
-            const targetDate = new Date('2025-07-15T00:00:00');
-            const timerElement = document.getElementById('countdown-timer');
-
-            function updateTimer() {
-                const now = new Date();
-                const timeDifference = targetDate - now;
-
-                if (timeDifference <= 0) {
-                    timerElement.textContent = 'Pre-Orders Closed!';
-                    return;
-                }
-
-                const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-
-                timerElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-            }
-
-            updateTimer();
-            setInterval(updateTimer, 1000);
-        }
-
-        // Handle pre-order form submission
-        document.getElementById('pre-order-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('pre-order-email').value;
-            const quantity = document.getElementById('pre-order-quantity').value;
-            const messageElement = document.getElementById('pre-order-message');
-
-            // Basic validation
-            if (!email || !quantity || quantity < 1 || quantity > 5) {
-                messageElement.textContent = 'Please enter a valid email and quantity (1-5).';
-                return;
-            }
-
-            // Store pre-order locally (for now)
-            const preOrders = JSON.parse(localStorage.getItem('hatakePreOrders')) || [];
-            preOrders.push({ email, quantity, product: 'Duffel Bag', date: new Date().toISOString() });
-            localStorage.setItem('hatakePreOrders', JSON.stringify(preOrders));
-
-            // Show success message and reset form
-            messageElement.textContent = 'Thank you for pre-ordering! We’ll contact you when the duffel bags arrive.';
-            document.getElementById('pre-order-form').reset();
-        });
-
-        // Start the countdown timer when the page loads
-        window.onload = startCountdown;
-    </script>
 </body>
 </html>

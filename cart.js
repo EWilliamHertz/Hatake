@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cartTotalSpan.textContent = `Total: $${total.toFixed(2)}`;
     };
 
-    document.querySelectorAll('.add-to-cart').forEach(button => {
+    document.querySelectorAll('.pre-order-btn').forEach(button => {
         button.addEventListener('click', () => {
             const name = button.getAttribute('data-name');
             const price = parseFloat(button.getAttribute('data-price'));
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             saveCart();
             updateCartDisplay();
-            alert(`Added ${name} ($${price.toFixed(2)}) to cart!`);
+            alert(`Added ${name} ($${price.toFixed(2)}) to pre-order cart! Email ewilliamhe@gmail.com to confirm your pre-order.`);
         });
     });
 
@@ -90,28 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Your cart is empty!');
             return;
         }
-        alert('Please email your order details to ewilliamhe@gmail.com to complete your purchase.');
+        alert('Please email your pre-order details to ewilliamhe@gmail.com to complete your purchase.');
     });
 
     updateCartDisplay();
 });
-const products = document.querySelectorAll('.product');
-document.getElementById('product-search').addEventListener('input', (e) => {
-    const search = e.target.value.toLowerCase();
-    products.forEach(product => {
-        const name = product.querySelector('h3').textContent.toLowerCase();
-        product.style.display = name.includes(search) ? 'block' : 'none';
-    });
-});
-document.getElementById('product-sort').addEventListener('change', (e) => {
-    const sort = e.target.value;
-    const grid = document.querySelector('.product-grid');
-    const sorted = Array.from(products).sort((a, b) => {
-        const priceA = parseFloat(a.querySelector('p').textContent.replace('$', ''));
-        const priceB = parseFloat(b.querySelector('p').textContent.replace('$', ''));
-        return sort === 'price-low' ? priceA - priceB : sort === 'price-high' ? priceB - priceA : 0;
-    });
-    grid.innerHTML = '';
-    sorted.forEach(product => grid.appendChild(product));
-});
-
