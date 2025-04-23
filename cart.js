@@ -1,9 +1,14 @@
 ```javascript
 document.addEventListener('DOMContentLoaded', () => {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let preOrders = JSON.parse(localStorage.getItem('hatakePreOrders')) || [];
 
     const saveCart = () => {
         localStorage.setItem('cart', JSON.stringify(cart));
+    };
+
+    const savePreOrders = () => {
+        localStorage.setItem('hatakePreOrders', JSON.stringify(preOrders));
     };
 
     const updateCartDisplay = () => {
@@ -39,19 +44,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const attachPreOrderListeners = () => {
         const buttons = document.querySelectorAll('.pre-order-btn');
-        console.log(`Found ${buttons.length} pre-order buttons`); // Debug: Check number of buttons
+        const forms = document.querySelectorAll('.pre-order-form');
+        console.log(`Found ${buttons.length} pre-order buttons, ${forms.length} pre-order forms`);
+
         buttons.forEach(button => {
-            button.removeEventListener('click', handlePreOrderClick); // Prevent duplicate listeners
+            button.removeEventListener('click', handlePreOrderClick);
             button.addEventListener('click', handlePreOrderClick);
+        });
+
+        forms.forEach(form => {
+            form.removeEventListener('submit', handlePreOrderFormSubmit);
+            form.addEventListener('submit', handlePreOrderFormSubmit);
         });
     };
 
     const handlePreOrderClick = (e) => {
-        e.stopPropagation(); // Prevent parent click events
+        e.stopPropagation();
         const button = e.currentTarget;
         const name = button.getAttribute('data-name');
         const price = parseFloat(button.getAttribute('data-price'));
-        console.log(`Clicked Pre-Order for: ${name}, Price: ${price}`); // Debug: Log click event
+        console.log(`Clicked Pre-Order for: ${name}, Price: ${price}`);
 
         if (!name || isNaN(price)) {
             console.error('Invalid product data:', { name, price });
@@ -69,6 +81,38 @@ document.addEventListener('DOMContentLoaded', () => {
         saveCart();
         updateCartDisplay();
         alert(`Added ${name} ($${price.toFixed(2)}) to pre-order cart! Email ewilliamhe@gmail.com to confirm your pre-order.`);
+    };
+
+    const handlePreOrderFormSubmit = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const form = e.currentTarget;
+        const name = form.getAttribute('data-name');
+        const price = parseFloat(form.getAttribute('data-price'));
+        const email = form.querySelector('.pre-order-email').value;
+        const quantity = parseInt(form.querySelector('.pre-order-quantity').value);
+        const messageElement = form.querySelector('.pre-order-message');
+        console.log(`Form submitted for: ${name}, Price: ${price}, Email: ${email}, Quantity: ${quantity}`);
+
+        if (!name || isNaN(price) || !email || isNaN(quantity) || quantity < 1 || quantity > 5) {
+            console.error('Invalid form data:', { name, price, email, quantity });
+            messageElement.textContent = 'Please enter a valid email and quantity (1-5).';
+            return;
+        }
+
+        const existingItem = cart.find(item => item.name === name);
+        if (existingItem) {
+            existingItem.quantity += quantity;
+        } else {
+            cart.push({ name, price, quantity });
+        }
+
+        preOrders.push({ email, name, quantity, price, date: new Date().toISOString() });
+        saveCart();
+        savePreOrders();
+        updateCartDisplay();
+        messageElement.textContent = 'Pre-order submitted! Check your cart and email ewilliamhe@gmail.com to confirm.';
+        form.reset();
     };
 
     document.getElementById('cart-items').addEventListener('click', (e) => {
@@ -109,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
     attachPreOrderListeners();
     updateCartDisplay();
 
-    // Re-attach listeners after sort/filter (called from script.js)
+    // Expose for re-attachment after sort/filter
     window.reAttachCartListeners = attachPreOrderListeners;
 });
 ```
