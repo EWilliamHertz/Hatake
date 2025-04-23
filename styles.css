@@ -51,7 +51,6 @@ header {
 .search-form {
     display: flex;
     gap: 10px;
-    margin-top: 1rem;
     justify-content: center;
     width: 100%;
     max-width: 400px;
@@ -128,7 +127,8 @@ main {
 
 #product-controls {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     gap: 1rem;
     margin-bottom: 1rem;
 }
@@ -138,6 +138,7 @@ main {
     border: 1px solid #ddd;
     border-radius: 3px;
     font-family: 'Roboto', Arial, sans-serif;
+    width: 200px;
 }
 
 .product-grid {
@@ -247,7 +248,7 @@ button:hover {
 
 #contact {
     margin-top: 2rem;
-    text-align: center;
+    text-align: `center;
 }
 
 #contact p {
@@ -299,6 +300,9 @@ footer a:hover {
         align-items: center;
     }
     #product-search {
+        width: 100%;
+    }
+    #product-sort {
         width: 100%;
     }
     .cart-item {
