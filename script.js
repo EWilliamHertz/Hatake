@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        
         sortSelect.addEventListener('change', () => {
             const sortValue = sortSelect.value;
             let sortedProducts = [...products];
