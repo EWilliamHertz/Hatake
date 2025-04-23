@@ -42,12 +42,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Events - Hatake TCG</title>
-    <meta name="description" content="Join Hatake TCG at upcoming SweCard events in Sweden to explore our merchandise, including Pellekuling’s sealed products.">
-    <meta property="og:title" content="Events - Hatake TCG">
-    <meta property="og:description" content="Join Hatake TCG at upcoming SweCard events in Sweden to explore our merchandise, including Pellekuling’s sealed products.">
+    <title>Cart - Hatake TCG</title>
+    <meta name="description" content="View and manage your Hatake TCG pre-order cart. Checkout to secure your premium TCG accessories.">
+    <meta property="og:title" content="Cart - Hatake TCG">
+    <meta property="og:description" content="View and manage your Hatake TCG pre-order cart. Checkout to secure your premium TCG accessories.">
     <meta property="og:image" content="https://i.imgur.com/k526Wip.jpg">
-    <meta property="og:url" content="https://ewilliamhertz.github.io/Hatake/events.html">
+    <meta property="og:url" content="https://ewilliamhertz.github.io/Hatake/cart.html">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -57,27 +57,38 @@
             <a href="index.html">Home</a>
             <a href="shop.html">Shop</a>
             <a href="about.html">About</a>
-            <a href="events.html" class="active">Events</a>
-            <a href="cart.html">Cart</a>
+            <a href="events.html">Events</a>
+            <a href="cart.html" class="active">Cart</a>
             <a href="invest.html">Invest</a>
         </nav>
     </header>
 
     <main>
-        <section id="events">
-            <h2>Upcoming Events</h2>
-            <p>We’re excited to announce that <a href="http://needtobegeek.se/">Hatake TCG</a> will be participating in the following <a href="http://www.swecard.org/">SweCard</a> events, where we’ll be selling merchandise, including Pellekuling’s sealed products!</p>
-            <ul>
-                <li><strong>SweCard Skara</strong>: September 27, 2025, in Skara, Sweden.</li>
-                <li><strong>SweCard Svedala</strong>: October 11-12, 2025, in Svedala, Sweden (just 20 minutes from Malmö).</li>
-            </ul>
-            <p>Join us at these events to explore our range of products, including exclusive sealed products from Pellekuling, perfect for collectors and enthusiasts. SweCard is Sweden’s largest expo for trading card enthusiasts, bringing together collectors, exhibitors, and fans from across the region. Don’t miss out on this opportunity to connect with the trading card community and grab some unique items!</p>
-            <p>For more information about SweCard, visit <a href="http://www.swecard.org/">www.swecard.org</a>.</p>
+        <section id="cart">
+            <h2>Your Pre-Order Cart</h2>
+            <div id="cart-items"></div>
+            <p id="cart-total">Total: $0.00</p>
+            <button id="clear-cart">Clear Cart</button>
+            <button id="checkout">Checkout</button>
         </section>
+
+        <!-- Pre-Order Confirmation Modal -->
+        <div id="pre-order-modal" class="modal">
+            <div class="modal-content">
+                <span class="modal-close">×</span>
+                <h3>Checkout Confirmed!</h3>
+                <p id="modal-message"></p>
+                <p>Please email <a href="mailto:ewilliamhe@gmail.com">ewilliamhe@gmail.com</a> with your order details to complete your purchase.</p>
+                <button class="modal-button">Close</button>
+            </div>
+        </div>
     </main>
 
     <footer>
         <p>© 2025 HatakeAB. All rights reserved. | <a href="invest.html">Invest</a></p>
     </footer>
+    <!-- Add EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="cart.js"></script>
 </body>
 </html>
