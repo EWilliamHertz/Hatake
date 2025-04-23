@@ -1,15 +1,42 @@
+:root {
+    --background-color: #f4f4f4;
+    --text-color: #333;
+    --header-bg: #FFFFFF;
+    --footer-bg: #FFFFFF;
+    --card-bg: white;
+    --link-color: #333;
+    --button-bg: #007BFF;
+    --button-hover-bg: #0056b3;
+}
+
+[data-theme="dark"] {
+    --background-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --header-bg: #2c2c2c;
+    --footer-bg: #2c2c2c;
+    --card-bg: #333;
+    --link-color: #66b0ff;
+    --button-bg: #66b0ff;
+    --button-hover-bg: #4a8fe6;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
 }
 
 header {
-    background-color: #FFFFFF;
-    color: #333;
+    background-color: var(--header-bg);
+    color: var(--text-color);
     text-align: center;
     padding: 1em 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 header img.small-logo {
@@ -22,7 +49,7 @@ nav.header-nav {
 }
 
 nav.header-nav a {
-    color: #333;
+    color: var(--text-color);
     margin: 0 1em;
     text-decoration: none;
 }
@@ -32,10 +59,21 @@ nav.header-nav a.active {
     text-decoration: underline;
 }
 
+#theme-toggle {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
 main {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2em;
+    text-align: center;
 }
 
 section {
@@ -43,21 +81,25 @@ section {
 }
 
 h2 {
-    color: #333;
+    color: var(--text-color);
 }
 
 .cta-button {
     display: inline-block;
     padding: 0.5em 1em;
-    background-color: #007BFF;
+    background-color: var(--button-bg);
     color: white;
     text-decoration: none;
     border-radius: 5px;
 }
 
+.cta-button:hover {
+    background-color: var(--button-hover-bg);
+}
+
 footer {
-    background-color: #FFFFFF;
-    color: #333;
+    background-color: var(--footer-bg);
+    color: var(--text-color);
     text-align: center;
     padding: 1em 0;
     position: relative;
@@ -66,8 +108,47 @@ footer {
 }
 
 footer a {
-    color: #333;
+    color: var(--link-color);
     text-decoration: none;
+}
+
+.social-share {
+    margin-top: 0.5em;
+}
+
+.social-share p {
+    display: inline;
+    margin-right: 0.5em;
+}
+
+.social-share a {
+    color: var(--button-bg);
+    text-decoration: none;
+    margin: 0 0.5em;
+}
+
+.social-share a:hover {
+    text-decoration: underline;
+}
+
+#back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--button-bg);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2em;
+    cursor: pointer;
+    display: none;
+    z-index: 1000;
+}
+
+#back-to-top:hover {
+    background-color: var(--button-hover-bg);
 }
 
 #product-controls {
@@ -93,11 +174,15 @@ footer a {
 
 #search-btn {
     padding: 0.5em 1em;
-    background-color: #007BFF;
+    background-color: var(--button-bg);
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+#search-btn:hover {
+    background-color: var(--button-hover-bg);
 }
 
 .product-grid {
@@ -107,7 +192,7 @@ footer a {
 }
 
 .product {
-    background-color: white;
+    background-color: var(--card-bg);
     padding: 1em;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
@@ -141,6 +226,13 @@ footer a {
     margin: 0.5em 0;
 }
 
+.product-status {
+    font-size: 0.9em;
+    color: #28a745;
+    margin: 0.5em 0;
+    font-weight: bold;
+}
+
 .countdown-timer {
     font-size: 0.9em;
     color: #e74c3c;
@@ -160,11 +252,15 @@ footer a {
 
 .pre-order-form button {
     padding: 0.5em;
-    background-color: #007BFF;
+    background-color: var(--button-bg);
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.pre-order-form button:hover {
+    background-color: var(--button-hover-bg);
 }
 
 .pre-order-message {
@@ -208,7 +304,7 @@ footer a {
 }
 
 .modal-content {
-    background-color: white;
+    background-color: var(--card-bg);
     margin: 15% auto;
     padding: 20px;
     border-radius: 5px;
@@ -227,7 +323,7 @@ footer a {
 
 .modal-button {
     padding: 0.5em 1em;
-    background-color: #007BFF;
+    background-color: var(--button-bg);
     color: white;
     border: none;
     border-radius: 5px;
@@ -235,8 +331,12 @@ footer a {
     margin-top: 1em;
 }
 
+.modal-button:hover {
+    background-color: var(--button-hover-bg);
+}
+
 .testimonial {
-    background-color: white;
+    background-color: var(--card-bg);
     padding: 1em;
     margin: 1em 0;
     border-radius: 5px;
@@ -246,7 +346,7 @@ footer a {
 details {
     margin: 0.5em 0;
     padding: 0.5em;
-    background-color: white;
+    background-color: var(--card-bg);
     border-radius: 5px;
 }
 
