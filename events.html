@@ -1,0 +1,82 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - Need to Be Geek</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your existing stylesheet -->
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Need to Be Geek</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section id="events">
+            <h2>Upcoming Events</h2>
+            <p>We’re excited to announce that <a href="http://needtobegeek.se/">Need to Be Geek</a> will be participating in the following <a href="http://www.swecard.org/">SweCard</a> events, where we’ll be selling merchandise, including Pellekuling’s sealed products!</p>
+            <ul>
+                <li><strong>SweCard Skara</strong>: September 27, 2025, in Skara, Sweden.</li>
+                <li><strong>SweCard Svedala</strong>: October 11-12, 2025, in Svedala, Sweden (just 20 minutes from Malmö).</li>
+            </ul>
+            <p>Join us at these events to explore our range of products, including exclusive sealed products from Pellekuling, perfect for collectors and enthusiasts. SweCard is Sweden’s largest expo for trading card enthusiasts, bringing together collectors, exhibitors, and fans from across the region. Don’t miss out on this opportunity to connect with the trading card community and grab some unique items!</p>
+            <p>For more information about SweCard, visit <a href="http://www.swecard.org/">www.swecard.org</a>.</p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Need to Be Geek. All rights reserved.</p>
+        <p><a href="http://needtobegeek.se/">needtobegeek.se</a></p>
+    </footer>
+</body>
+</html>
