@@ -37,57 +37,13 @@
         }
         return gk_fileData[filename] || "";
         }
-        </script><script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-</script>
-<!DOCTYPE html>
+        </script><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop Hatake TCG Merchandise</title>
-    <meta name="description" content="Pre-order Hatake TCG's premium trading card game accessories, including duffel bags, top-loaders, matte sleeves, deckboxes, and binders.">
-    <meta property="og:title" content="Shop Hatake TCG Merchandise">
-    <meta property="og:description" content="Secure your pre-order for Hatake TCG's premium accessories. Available July and October 2025!">
-    <meta property="og:image" content="https://i.imgur.com/k526Wip.jpg">
-    <meta property="og:url" content="https://ewilliamhertz.github.io/Hatake/shop.html">
+    <title>Shop - Hatake TCG</title>
+    <meta name="description" content="Shop premium TCG accessories at Hatake TCG. Pre-order matte sleeves, top-loaders, deckboxes, and duffel bags for our October 15, 2025 launch!">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -102,203 +58,82 @@
         </nav>
     </header>
 
-    <main>
-        <section id="shop">
-            <h2>Pre-Order Our TCG Accessories</h2>
-            <p>Secure your Hatake TCG merchandise before our official launch! All products are available for pre-order, with shipping dates in July and October 2025.</p>
+    <main style="text-align: center;">
+        <section id="products">
+            <h2>Our Products</h2>
+            <p>Explore our curated selection of premium TCG accessories, available for pre-order ahead of our October 15, 2025 launch!</p>
+            
             <div id="product-controls">
                 <select id="product-sort">
-                    <option value="default">Sort: Default</option>
-                    <option value="price-low">Price: Low to High</option>
-                    <option value="price-high">Price: High to Low</option>
+                    <option value="name-asc">Sort by Name (A-Z)</option>
+                    <option value="name-desc">Sort by Name (Z-A)</option>
+                    <option value="price-asc">Sort by Price (Low to High)</option>
+                    <option value="price-desc">Sort by Price (High to Low)</option>
                 </select>
-                <form id="search-form" class="search-form">
+                <form class="search-form">
                     <input type="text" id="product-search" placeholder="Search products...">
                     <button type="submit" id="search-btn">Search</button>
                 </form>
             </div>
-            <div class="product-grid">
-                <div class="product" onclick="toggleDetails(this)">
-                    <div class="product-content">
-                        <img src="https://i.imgur.com/xV7ikH1.jpg" alt="Duffel Bag">
-                        <h3>Duffel Bag</h3>
-                        <p>$30.00</p>
-                        <div class="countdown-timer" data-target="2025-07-15T00:00:00">Loading...</div>
-                        <form class="pre-order-form" data-name="Duffel Bag" data-price="30.00">
-                            <input type="email" class="pre-order-email" placeholder="Your email address" required>
-                            <input type="number" class="pre-order-quantity" placeholder="Quantity (1-5)" min="1" max="5" required>
-                            <button type="submit">Pre-Order Now</button>
-                            <p class="pre-order-message"></p>
-                        </form>
-                    </div>
+
+            <div class="product-grid" id="product-grid">
+                <div class="product" data-name="duffel bag" data-price="50">
+                    <div class="no-image-placeholder">No Image Available</div>
+                    <h3>Duffel Bag</h3>
+                    <p>$50.00</p>
+                    <p class="countdown-timer" data-launch-date="2025-10-15T00:00:00">Available in: <span></span></p>
                     <div class="details">
-                        <h4>Duffel Bag</h4>
-                        <p>Carry your TCG gear in style with our 47*28*55cm duffel bag. Durable, branded, and perfect for tournaments. Available July 2025.</p>
-                        <form class="pre-order-form" data-name="Duffel Bag" data-price="30.00">
-                            <input type="email" class="pre-order-email" placeholder="Your email address" required>
-                            <input type="number" class="pre-order-quantity" placeholder="Quantity (1-5)" min="1" max="5" required>
-                            <button type="submit">Pre-Order Now</button>
-                            <p class="pre-order-message"></p>
+                        <h4>Duffel Bag Details</h4>
+                        <p>A spacious duffel bag designed for TCG players, with compartments for decks, accessories, and more. Made with durable, water-resistant material.</p>
+                        <form class="pre-order-form">
+                            <input type="email" class="pre-order-email" placeholder="Your email" required>
+                            <input type="number" class="pre-order-quantity" placeholder="Quantity" min="1" required>
+                            <button type="submit">Pre-Order</button>
                         </form>
+                        <p class="pre-order-message"></p>
                     </div>
                 </div>
-                <div class="product" onclick="toggleDetails(this)">
-                    <div class="product-content">
-                        <img src="/Hatake/images/top-loader.jpg" alt="35pt Top-Loader">
-                        <h3>25x 35pt Top-Loader</h3>
-                        <p>$3.00</p>
-                        <div class="countdown-timer" data-target="2025-10-15T00:00:00">Loading...</div>
-                        <form class="pre-order-form" data-name="25x 35pt Top-Loader" data-price="3.00">
-                            <input type="email" class="pre-order-email" placeholder="Your email address" required>
-                            <input type="number" class="pre-order-quantity" placeholder="Quantity (1-5)" min="1" max="5" required>
-                            <button type="submit">Pre-Order Now</button>
-                            <p class="pre-order-message"></p>
-                        </form>
-                    </div>
+
+                <div class="product" data-name="matte sleeves" data-price="10">
+                    <div class="no-image-placeholder">No Image Available</div>
+                    <h3>Matte Sleeves</h3>
+                    <p>$10.00</p>
+                    <p class="countdown-timer" data-launch-date="2025-10-15T00:00:00">Available in: <span></span></p>
                     <div class="details">
-                        <h4>25x 35pt Top-Loader</h4>
-                        <p>Protect your cards with our rigid 35pt top-loaders. Pack of 25, ideal for standard TCG cards. Available October 2025.</p>
-                        <form class="pre-order-form" data-name="25x 35pt Top-Loader" data-price="3.00">
-                            <input type="email" class="pre-order-email" placeholder="Your email address" required>
-                            <input type="number" class="pre-order-quantity" placeholder="Quantity (1-5)" min="1" max="5" required>
-                            <button type="submit">Pre-Order Now</button>
-                            <p class="pre-order-message"></p>
+                        <h4>Matte Sleeves Details</h4>
+                        <p>High-quality matte sleeves for TCG cards, offering a non-slip grip and superior protection. Pack of 60 sleeves.</p>
+                        <form class="pre-order-form">
+                            <input type="email" class="pre-order-email" placeholder="Your email" required>
+                            <input type="number" class="pre-order-quantity" placeholder="Quantity" min="1" required>
+                            <button type="submit">Pre-Order</button>
                         </form>
+                        <p class="pre-order-message"></p>
                     </div>
                 </div>
-                <div class="product" onclick="toggleDetails(this)">
-                    <div class="product-content">
-                        <img src="/Hatake/images/top-loader.jpg" alt="130pt Top-Loader">
-                        <h3>10x 130pt Top-Loader</h3>
-                        <p>$3.50</p>
-                        <div class="countdown-timer" data-target="2025-10-15T00:00:00">Loading...</div>
-                        <form class="pre-order-form" data-name="10x 130pt Top-Loader" data-price="3.50">
-                            <input type="email" class="pre-order-email" placeholder="Your email address" required>
-                            <input type="number" class="pre-order-quantity" placeholder="Quantity (1-5)" min="1" max="5" required>
-                            <button type="submit">Pre-Order Now</button>
-                            <p class="pre-order-message"></p>
-                        </form>
-                    </div>
+
+                <div class="product" data-name="top-loader" data-price="5">
+                    <img src="/Hatake/images/top-loader.jpg" alt="Top-Loader">
+                    <h3>Top-Loader</h3>
+                    <p>$5.00</p>
+                    <p class="countdown-timer" data-launch-date="2025-10-15T00:00:00">Available in: <span></span></p>
                     <div class="details">
-                        <h4>10x 130pt Top-Loader</h4>
-                        <p>Extra-thick 130pt top-loaders for premium card protection. Pack of 10, fits standard TCG cards. Available October 2025.</p>
-                        <form class="pre-order-form" data-name="10x 130pt Top-Loader" data-price="3.50">
-                            <input type="email" class="pre-order-email" placeholder="Your email address" required>
-                            <input type="number" class="pre-order-quantity" placeholder="Quantity (1-5)" min="1" max="5" required>
-                            <button type="submit">Pre-Order Now</button>
-                            <p class="pre-order-message"></p>
+                        <h4>Top-Loader Details</h4>
+                        <p>Rigid top-loaders for ultimate card protection, perfect for collectors. Pack of 10 top-loaders.</p>
+                        <form class="pre-order-form">
+                            <input type="email" class="pre-order-email" placeholder="Your email" required>
+                            <input type="number" class="pre-order-quantity" placeholder="Quantity" min="1" required>
+                            <button type="submit">Pre-Order</button>
                         </form>
-                    </div>
-                </div>
-                <div class="product" onclick="toggleDetails(this)">
-                    <div class="product-content">
-                        <img src="https://i.imgur.com/Kz10FCc.jpg" alt="Matte Sleeves">
-                        <h3>66*91 Matte Sleeves, Black</h3>
-                        <p>$8.90</p>
-                        <div class="countdown-timer" data-target="2025-10-15T00:00:00">Loading...</div>
-                        <form class="pre-order-form" data-name="66*91 Matte Sleeves, Black" data-price="8.90">
-                            <input type="email" class="pre-order-email" placeholder="Your email address" required>
-                            <input type="number" class="pre-order-quantity" placeholder="Quantity (1-5)" min="1" max="5" required>
-                            <button type="submit">Pre-Order Now</button>
-                            <p class="pre-order-message"></p>
-                        </form>
-                    </div>
-                    <div class="details">
-                        <h4>66*91 Matte Sleeves, Black</h4>
-                        <p>Premium black matte sleeves with a non-slip grip. Fits standard TCG cards (66x91mm), pack of 100. Available October 2025.</p>
-                        <form class="pre-order-form" data-name="66*91 Matte Sleeves, Black" data-price="8.90">
-                            <input type="email" class="pre-order-email" placeholder="Your email address" required>
-                            <input type="number" class="pre-order-quantity" placeholder="Quantity (1-5)" min="1" max="5" required>
-                            <button type="submit">Pre-Order Now</button>
-                            <p class="pre-order-message"></p>
-                        </form>
-                    </div>
-                </div>
-                <div class="product" onclick="toggleDetails(this)">
-                    <div class="product-content">
-                        <img src="https://i.imgur.com/QFzheaZ.jpg" alt="PU Deckbox">
-                        <h3>PU Deckbox (160+ Cards)</h3>
-                        <p>$30.00</p>
-                        <div class="countdown-timer" data-target="2025-10-15T00:00:00">Loading...</div>
-                        <form class="pre-order-form" data-name="PU Deckbox (160+ Cards)" data-price="30.00">
-                            <input type="email" class="pre-order-email" placeholder="Your email address" required>
-                            <input type="number" class="pre-order-quantity" placeholder="Quantity (1-5)" min="1" max="5" required>
-                            <button type="submit">Pre-Order Now</button>
-                            <p class="pre-order-message"></p>
-                        </form>
-                    </div>
-                    <div class="details">
-                        <h4>PU Deckbox (160+ Cards)</h4>
-                        <p>Store up to 160+ cards in our premium PU leather deckbox with magnetic closure and Hatake branding. Ideal for Commander decks. Available October 2025.</p>
-                        <form class="pre-order-form" data-name="PU Deckbox (160+ Cards)" data-price="30.00">
-                            <input type="email" class="pre-order-email" placeholder="Your email address" required>
-                            <input type="number" class="pre-order-quantity" placeholder="Quantity (1-5)" min="1" max="5" required>
-                            <button type="submit">Pre-Order Now</button>
-                            <p class="pre-order-message"></p>
-                        </form>
-                    </div>
-                </div>
-                <div class="product" onclick="toggleDetails(this)">
-                    <div class="product-content">
-                        <div class="no-image-placeholder">Image Coming Soon</div>
-                        <h3>12-Slot 480 Top-Loader Binder</h3>
-                        <p>$36.00</p>
-                        <div class="countdown-timer" data-target="2025-10-15T00:00:00">Loading...</div>
-                        <form class="pre-order-form" data-name="12-Slot 480 Top-Loader Binder" data-price="36.00">
-                            <input type="email" class="pre-order-email" placeholder="Your email address" required>
-                            <input type="number" class="pre-order-quantity" placeholder="Quantity (1-5)" min="1" max="5" required>
-                            <button type="submit">Pre-Order Now</button>
-                            <p class="pre-order-message"></p>
-                        </form>
-                    </div>
-                    <div class="details">
-                        <h4>12-Slot 480 Top-Loader Binder</h4>
-                        <p>Store up to 480 cards in our premium binder with side-loading pockets and a zipper. Branded and durable. Available October 2025.</p>
-                        <form class="pre-order-form" data-name="12-Slot 480 Top-Loader Binder" data-price="36.00">
-                            <input type="email" class="pre-order-email" placeholder="Your email address" required>
-                            <input type="number" class="pre-order-quantity" placeholder="Quantity (1-5)" min="1" max="5" required>
-                            <button type="submit">Pre-Order Now</button>
-                            <p class="pre-order-message"></p>
-                        </form>
+                        <p class="pre-order-message"></p>
                     </div>
                 </div>
             </div>
         </section>
-
-        <section id="faq">
-            <h2>Frequently Asked Questions</h2>
-            <details>
-                <summary>When will my pre-order ship?</summary>
-                <p>Products are expected to ship in July 2025 (Duffel Bag) or October 2025 (other items). We’ll confirm exact dates via email.</p>
-            </details>
-            <details>
-                <summary>How do I complete my pre-order payment?</summary>
-                <p>After submitting your pre-order, email <a href="mailto:ewilliamhe@gmail.com">ewilliamhe@gmail.com</a> with your details, and we’ll provide payment instructions.</p>
-            </details>
-            <details>
-                <summary>What is your return policy?</summary>
-                <p>We offer returns within 30 days of receipt if the product is unused and in its original packaging. Contact us at <a href="mailto:ewilliamhe@gmail.com">ewilliamhe@gmail.com</a> for return instructions.</p>
-            </details>
-        </section>
-
-        <!-- Pre-Order Confirmation Modal -->
-        <div id="pre-order-modal" class="modal">
-            <div class="modal-content">
-                <span class="modal-close">×</span>
-                <h3>Pre-Order Confirmed!</h3>
-                <p id="modal-message"></p>
-                <p>Please email <a href="mailto:ewilliamhe@gmail.com">ewilliamhe@gmail.com</a> with your pre-order details to complete your purchase.</p>
-                <button class="modal-button">Close</button>
-            </div>
-        </div>
     </main>
 
     <footer>
         <p>© 2025 HatakeAB. All rights reserved. | <a href="invest.html">Invest</a></p>
     </footer>
-    <!-- Add EmailJS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script src="preorder.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
