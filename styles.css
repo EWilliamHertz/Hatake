@@ -6,8 +6,8 @@ body {
 }
 
 header {
-    background-color: #333;
-    color: white;
+    background-color: #FFFFFF;
+    color: #333;
     text-align: center;
     padding: 1em 0;
 }
@@ -22,7 +22,7 @@ nav.header-nav {
 }
 
 nav.header-nav a {
-    color: white;
+    color: #333;
     margin: 0 1em;
     text-decoration: none;
 }
@@ -56,8 +56,8 @@ h2 {
 }
 
 footer {
-    background-color: #333;
-    color: white;
+    background-color: #FFFFFF;
+    color: #333;
     text-align: center;
     padding: 1em 0;
     position: relative;
@@ -66,7 +66,7 @@ footer {
 }
 
 footer a {
-    color: white;
+    color: #333;
     text-decoration: none;
 }
 
