@@ -34,28 +34,65 @@ body {
     line-height: 1.6; /* Improved readability */
 }
 
+/* Updated header with gradient background and card pattern */
 header {
-    background-color: var(--header-bg);
-    color: var(--text-color);
-    text-align: center;
-    padding: 1em 0;
+    background: linear-gradient(135deg, #1E3A8A 0%, #60A5FA 100%);
+    position: relative;
+    padding: 20px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Added shadow */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Retained shadow */
 }
 
-header img.small-logo {
-    width: 100px;
+/* Card pattern overlay using pseudo-elements */
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect x="10" y="10" width="80" height="60" rx="5" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>') repeat;
+    opacity: 0.3;
+    z-index: 0;
+}
+
+/* Larger logo with animation, replacing .small-logo */
+.logo {
+    width: 150px;
     height: auto;
+    animation: glow 2s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
 }
 
+/* Glow animation for the logo */
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 5px rgba(94, 165, 250, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(94, 165, 250, 0.8);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(94, 165, 250, 0.5);
+    }
+}
+
+/* Updated navigation styles */
 nav.header-nav {
-    margin-top: 1em;
+    margin-top: 0; /* Removed margin-top since flexbox centers it */
+    position: relative;
+    z-index: 1;
 }
 
 nav.header-nav a {
-    color: var(--text-color);
+    color: #ffffff; /* White for readability against gradient background */
     margin: 0 1.2em; /* Slightly more spacing */
     text-decoration: none;
     font-weight: 600; /* Bolder nav links */
@@ -69,19 +106,18 @@ nav.header-nav a:hover {
 
 nav.header-nav a.active {
     font-weight: 600;
-    text-decoration: underline;
-    color: var(--accent-color); /* Highlight active page */
+    color: var(--accent-color); /* Highlight active page with teal */
+    border-bottom: 2px solid var(--accent-color); /* Underline active link */
 }
 
 #theme-toggle {
-    position: absolute;
-    top: 1em;
-    right: 1em;
+    position: relative; /* Changed from absolute to work with flexbox */
     background: none;
     border: none;
     font-size: 1.5em;
     cursor: pointer;
     transition: transform 0.3s;
+    z-index: 1;
 }
 
 #theme-toggle:hover {
