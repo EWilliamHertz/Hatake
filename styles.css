@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
 :root {
     --background-color: #f4f4f4;
     --text-color: #333;
@@ -7,6 +9,7 @@
     --link-color: #333;
     --button-bg: #007BFF;
     --button-hover-bg: #0056b3;
+    --accent-color: #26A69A; /* Teal accent color for buttons and links */
 }
 
 [data-theme="dark"] {
@@ -16,17 +19,19 @@
     --footer-bg: #2c2c2c;
     --card-bg: #333;
     --link-color: #66b0ff;
-    --button-bg: #66b0ff;
-    --button-hover-bg: #4a8fe6;
+    --button-bg: #26A69A; /* Use teal in dark mode */
+    --button-hover-bg: #1c7a71;
+    --accent-color: #4DD0E1; /* Lighter teal for dark mode */
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', Arial, sans-serif; /* Updated font */
     margin: 0;
     padding: 0;
     background-color: var(--background-color);
     color: var(--text-color);
     transition: background-color 0.3s, color 0.3s;
+    line-height: 1.6; /* Improved readability */
 }
 
 header {
@@ -37,6 +42,7 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Added shadow */
 }
 
 header img.small-logo {
@@ -50,13 +56,21 @@ nav.header-nav {
 
 nav.header-nav a {
     color: var(--text-color);
-    margin: 0 1em;
+    margin: 0 1.2em; /* Slightly more spacing */
     text-decoration: none;
+    font-weight: 600; /* Bolder nav links */
+    transition: color 0.3s, transform 0.3s; /* Smooth hover effects */
+}
+
+nav.header-nav a:hover {
+    color: var(--accent-color); /* Teal on hover */
+    transform: scale(1.05); /* Slight scale-up on hover */
 }
 
 nav.header-nav a.active {
-    font-weight: bold;
+    font-weight: 600;
     text-decoration: underline;
+    color: var(--accent-color); /* Highlight active page */
 }
 
 #theme-toggle {
@@ -67,6 +81,11 @@ nav.header-nav a.active {
     border: none;
     font-size: 1.5em;
     cursor: pointer;
+    transition: transform 0.3s;
+}
+
+#theme-toggle:hover {
+    transform: rotate(20deg); /* Fun hover effect */
 }
 
 main {
@@ -77,43 +96,87 @@ main {
 }
 
 section {
-    margin-bottom: 2em;
+    margin-bottom: 3em; /* More spacing between sections */
 }
 
 h2 {
     color: var(--text-color);
+    font-size: 2.2em; /* Larger headings */
+    font-weight: 600;
+    margin-bottom: 0.5em;
+}
+
+h3 {
+    font-size: 1.5em;
+    font-weight: 600;
 }
 
 .cta-button {
     display: inline-block;
-    padding: 0.5em 1em;
-    background-color: var(--button-bg);
+    padding: 0.75em 1.5em; /* Larger buttons */
+    background: linear-gradient(45deg, var(--button-bg), var(--accent-color)); /* Gradient background */
     color: white;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 8px; /* More rounded */
+    font-weight: 600;
+    transition: background 0.3s, transform 0.3s;
 }
 
 .cta-button:hover {
-    background-color: var(--button-hover-bg);
+    background: linear-gradient(45deg, var(--button-hover-bg), var(--accent-color));
+    transform: translateY(-2px); /* Lift on hover */
 }
 
 footer {
     background-color: var(--footer-bg);
     color: var(--text-color);
     text-align: center;
-    padding: 1em 0;
+    padding: 2em 0; /* More padding */
     position: relative;
     bottom: 0;
     width: 100%;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
 }
 
 footer a {
-    color: var(--link-color);
+    color: var(--accent-color); /* Teal links */
     text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: var(--button-hover-bg);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+    max-width: 800px;
+    margin: 0 auto 1em;
+    text-align: left;
+}
+
+.footer-content h4 {
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+}
+
+.footer-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-content ul li {
+    margin-bottom: 0.5em;
+}
+
+.footer-content ul li a {
+    font-size: 0.9em;
 }
 
 .social-share {
-    margin-top: 0.5em;
+    margin-top: 1em;
 }
 
 .social-share p {
@@ -122,9 +185,10 @@ footer a {
 }
 
 .social-share a {
-    color: var(--button-bg);
+    color: var(--accent-color);
     text-decoration: none;
     margin: 0 0.5em;
+    font-weight: 600;
 }
 
 .social-share a:hover {
@@ -139,27 +203,34 @@ footer a {
     color: white;
     border: none;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 1.2em;
+    width: 60px;
+    height: 60px;
+    font-size: 1.5em;
     cursor: pointer;
     display: none;
-    z-index: 1000;
+    z-index: 1001;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    transition: background 0.3s, transform 0.3s;
 }
 
 #back-to-top:hover {
     background-color: var(--button-hover-bg);
+    transform: scale(1.1); /* Slight scale-up on hover */
 }
 
 #product-controls {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1em;
+    margin-bottom: 2em;
 }
 
 #product-sort {
-    padding: 0.5em;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    border: 1px solid var(--text-color);
+    background-color: var(--card-bg);
+    color: var(--text-color);
 }
 
 .search-form {
@@ -168,41 +239,46 @@ footer a {
 }
 
 #product-search {
-    padding: 0.5em;
+    padding: 0.5em 1em;
     margin-right: 0.5em;
+    border-radius: 5px;
+    border: 1px solid var(--text-color);
 }
 
 #search-btn {
     padding: 0.5em 1em;
-    background-color: var(--button-bg);
+    background: linear-gradient(45deg, var(--button-bg), var(--accent-color));
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
 }
 
 #search-btn:hover {
-    background-color: var(--button-hover-bg);
+    background: linear-gradient(45deg, var(--button-hover-bg), var(--accent-color));
+    transform: translateY(-2px);
 }
 
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1em;
+    gap: 2em; /* More spacing */
 }
 
 .product {
     background-color: var(--card-bg);
-    padding: 1em;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    padding: 1.5em; /* More padding */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Softer shadow */
     cursor: pointer;
     position: relative;
-    transition: transform 0.2s;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .product:hover {
-    transform: scale(1.02);
+    transform: scale(1.05); /* Scale-up on hover */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* Stronger shadow on hover */
 }
 
 .product img {
@@ -230,7 +306,7 @@ footer a {
     font-size: 0.9em;
     color: #28a745;
     margin: 0.5em 0;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .countdown-timer {
@@ -252,15 +328,18 @@ footer a {
 
 .pre-order-form button {
     padding: 0.5em;
-    background-color: var(--button-bg);
+    background: linear-gradient(45deg, var(--button-bg), var(--accent-color));
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s, transform 0.3s;
 }
 
 .pre-order-form button:hover {
-    background-color: var(--button-hover-bg);
+    background: linear-gradient(45deg, var(--button-hover-bg), var(--accent-color));
+    transform: translateY(-2px);
 }
 
 .pre-order-message {
@@ -280,7 +359,7 @@ footer a {
     color: white;
     padding: 1em;
     box-sizing: border-box;
-    border-radius: 5px;
+    border-radius: 10px;
     z-index: 10;
 }
 
@@ -307,10 +386,11 @@ footer a {
     background-color: var(--card-bg);
     margin: 15% auto;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 10px;
     width: 80%;
     max-width: 500px;
     position: relative;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
 .modal-close {
@@ -323,46 +403,62 @@ footer a {
 
 .modal-button {
     padding: 0.5em 1em;
-    background-color: var(--button-bg);
+    background: linear-gradient(45deg, var(--button-bg), var(--accent-color));
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     margin-top: 1em;
+    transition: background 0.3s, transform 0.3s;
 }
 
 .modal-button:hover {
-    background-color: var(--button-hover-bg);
+    background: linear-gradient(45deg, var(--button-hover-bg), var(--accent-color));
+    transform: translateY(-2px);
 }
 
 .testimonial {
     background-color: var(--card-bg);
-    padding: 1em;
+    padding: 1.5em;
     margin: 1em 0;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 details {
-    margin: 0.5em 0;
-    padding: 0.5em;
+    margin: 1em 0;
+    padding: 1em;
     background-color: var(--card-bg);
-    border-radius: 5px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+details:hover {
+    background-color: #f0f0f0; /* Light hover effect */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+[data-theme="dark"] details:hover {
+    background-color: #3a3a3a; /* Dark mode hover effect */
 }
 
 summary {
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 1.2em;
+    padding: 0.5em 0;
 }
 
 /* Mobile-specific styles */
 @media (max-width: 600px) {
     .product-grid {
         grid-template-columns: 1fr;
+        gap: 1.5em;
     }
 
     .product {
-        padding: 0.5em;
+        padding: 1em;
     }
 
     .details {
@@ -388,5 +484,14 @@ summary {
     .pre-order-email, .pre-order-quantity, .pre-order-form button {
         font-size: 16px;
         padding: 0.75em;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 1.8em;
     }
 }
