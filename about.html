@@ -1,43 +1,4 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -64,6 +25,25 @@
             <h2>About Hatake TCG</h2>
             <p>Hatake TCG is a Swedish company dedicated to creating premium trading card accessories for enthusiasts and collectors. We’re launching our first product line in 2025, featuring durable top-loaders, matte sleeves, deckboxes, binders, and more.</p>
             <p>Our mission is to enhance your TCG experience with high-quality, stylish gear. Stay tuned for our official launch at our Falköping event in October 2025!</p>
+
+            <h3>Our Story</h3>
+            <p>Thank you for visiting our website. Hatake TCG is a project founded by Ernst-William Hertz, a Swedish entrepreneur based in Falköping, Sweden. The journey began in February 2025, with countless hours dedicated to crafting the vision and business documents alongside Mark Jensen from Esbjerg, Denmark.</p>
+            <p>Ernst-William and Mark share a unique bond, having once lived together and overcome personal challenges, including substance use. Now, both have been sober for years—Mark for four years and Ernst-William for three—and are committed to building a successful company together. This venture is a family-driven project, with support from our loved ones and a valued partner, Virre, based in Malmö. Virre brings extraordinary experience and will represent Hatake TCG at various conventions, where his warm and engaging personality will shine.</p>
+            <p>While many individuals have contributed to this project behind the scenes, some are still deciding whether to go public with their involvement as we prepare to register the stock company by the end of June. The Hatake TCG logo was thoughtfully designed by Richard Brorson Moreau, whose creativity has helped shape our brand identity.</p>
+
+            <h3>Join Our Team</h3>
+            <p>As we grow, we’re looking for passionate sales staff to join our journey. If you’re interested in representing Hatake TCG and earning a percentage of the net profit from sales to your clients, we’d love to hear from you. As a sales representative, you’ll be the primary contact for stores, earning commissions on all deliveries while our team handles shipping and logistics. This is a unique opportunity to be part of a growing brand in the TCG community.</p>
+
+            <div id="contact-form">
+                <h3>Send Us Your Suggestions</h3>
+                <p>Have ideas or feedback? We’d love to hear from you!</p>
+                <form action="https://formspree.io/f/xyzwyayq" method="POST">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+                    <button type="submit">Send</button>
+                </form>
+            </div>
         </section>
     </main>
 
