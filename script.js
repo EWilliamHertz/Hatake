@@ -3,16 +3,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const backToTopButton = document.getElementById("back-to-top");
     if (backToTopButton) {
         window.addEventListener("scroll", () => {
-            if (window.scrollY > 300) {
+            console.log("Scroll event triggered, scrollY:", window.scrollY); // Debugging
+            if (window.scrollY > 200) { // Lowered threshold
+                console.log("Showing back-to-top button"); // Debugging
                 backToTopButton.style.display = "block";
             } else {
+                console.log("Hiding back-to-top button"); // Debugging
                 backToTopButton.style.display = "none";
             }
         });
 
         backToTopButton.addEventListener("click", () => {
+            console.log("Back-to-top button clicked"); // Debugging
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
+    } else {
+        console.error("Back-to-top button not found in DOM"); // Debugging
     }
 
     // Dark Mode Toggle
@@ -70,25 +76,44 @@ document.addEventListener("DOMContentLoaded", () => {
     // Countdown timer functionality
     const timers = document.querySelectorAll(".countdown-timer");
     timers.forEach(timer => {
-        const targetDate = new Date(timer.getAttribute("data-target")).getTime();
-        const updateTimer = () => {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-
-            if (distance < 0) {
-                timer.textContent = "Available Now!";
-                return;
+        try {
+            const targetDate = new Date(timer.getAttribute("data-target")).getTime();
+            if (isNaN(targetDate)) {
+                throw new Error(`Invalid target date: ${timer.getAttribute("data-target")}`);
             }
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            const updateTimer = () => {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
 
-            timer.querySelector("span").textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-        };
-        updateTimer();
-        setInterval(updateTimer, 1000);
+                if (distance < 0) {
+                    timer.textContent = "Available Now!";
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                const timeString = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+                // Check if there's a span inside the timer (used in shop.html)
+                const span = timer.querySelector("span");
+                if (span) {
+                    span.textContent = timeString;
+                } else {
+                    // If no span (as in events.html), update the timer div directly
+                    timer.textContent = timeString;
+                }
+            };
+
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        } catch (error) {
+            console.error(`Error in countdown timer: ${error.message}`);
+            timer.textContent = "Timer Error";
+        }
     });
 
     // Pre-order form handling
