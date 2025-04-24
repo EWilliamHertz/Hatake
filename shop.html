@@ -1,43 +1,4 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -79,9 +40,9 @@
                 </form>
             </div>
             <div class="product-grid">
-                <div class="product" onclick="toggleDetails(this)">
+                <div class="product" onclick="toggleDetails(this)" tabindex="0" aria-label="Duffel Bag - $30.00, Pre-Order Available">
                     <div class="product-content">
-                        <img src="https://i.imgur.com/xV7ikH1.jpg" alt="Duffel Bag">
+                        <img src="https://i.imgur.com/xV7ikH1.jpg" alt="Hatake TCG Duffel Bag for tournaments" loading="lazy">
                         <h3>Duffel Bag</h3>
                         <p>$30.00</p>
                         <p class="product-status">Pre-Order Available</p>
@@ -104,9 +65,9 @@
                         </form>
                     </div>
                 </div>
-                <div class="product" onclick="toggleDetails(this)">
+                <div class="product" onclick="toggleDetails(this)" tabindex="0" aria-label="25x 35pt Top-Loader - $3.00, Pre-Order Available">
                     <div class="product-content">
-                        <img src="/Hatake/images/top-loader.jpg" alt="35pt Top-Loader">
+                        <div class="no-image-placeholder">Image Coming Soon</div>
                         <h3>25x 35pt Top-Loader</h3>
                         <p>$3.00</p>
                         <p class="product-status">Pre-Order Available</p>
@@ -129,9 +90,9 @@
                         </form>
                     </div>
                 </div>
-                <div class="product" onclick="toggleDetails(this)">
+                <div class="product" onclick="toggleDetails(this)" tabindex="0" aria-label="10x 130pt Top-Loader - $3.50, Pre-Order Available">
                     <div class="product-content">
-                        <img src="/Hatake/images/top-loader.jpg" alt="130pt Top-Loader">
+                        <div class="no-image-placeholder">Image Coming Soon</div>
                         <h3>10x 130pt Top-Loader</h3>
                         <p>$3.50</p>
                         <p class="product-status">Pre-Order Available</p>
@@ -145,7 +106,7 @@
                     </div>
                     <div class="details">
                         <h4>10x 130pt Top-Loader</h4>
-                        <p>Extra-thick 130pt top-loaders for premium card protection. Pack of 10, fits standard TCG cards. Available October 2025.</p>
+                       .ConcurrentModificationException: Protect your cards with our rigid 35pt top-loaders. Pack of 25, ideal for standard TCG cards. Available October 2025.</p>
                         <form class="pre-order-form" data-name="10x 130pt Top-Loader" data-price="3.50">
                             <input type="email" class="pre-order-email" placeholder="Your email address" required>
                             <input type="number" class="pre-order-quantity" placeholder="Quantity (1-5)" min="1" max="5" required>
@@ -154,9 +115,9 @@
                         </form>
                     </div>
                 </div>
-                <div class="product" onclick="toggleDetails(this)">
+                <div class="product" onclick="toggleDetails(this)" tabindex="0" aria-label="66*91 Matte Sleeves, Black - $8.90, Pre-Order Available">
                     <div class="product-content">
-                        <img src="https://i.imgur.com/Kz10FCc.jpg" alt="Matte Sleeves">
+                        <img src="https://i.imgur.com/Kz10FCc.jpg" alt="Hatake TCG 66x91 Matte Sleeves in Black" loading="lazy">
                         <h3>66*91 Matte Sleeves, Black</h3>
                         <p>$8.90</p>
                         <p class="product-status">Pre-Order Available</p>
@@ -179,9 +140,9 @@
                         </form>
                     </div>
                 </div>
-                <div class="product" onclick="toggleDetails(this)">
+                <div class="product" onclick="toggleDetails(this)" tabindex="0" aria-label="PU Deckbox (160+ Cards) - $30.00, Pre-Order Available">
                     <div class="product-content">
-                        <img src="https://i.imgur.com/QFzheaZ.jpg" alt="PU Deckbox">
+                        <img src="https://i.imgur.com/QFzheaZ.jpg" alt="Hatake TCG PU Deckbox for 160+ Cards" loading="lazy">
                         <h3>PU Deckbox (160+ Cards)</h3>
                         <p>$30.00</p>
                         <p class="product-status">Pre-Order Available</p>
@@ -204,7 +165,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="product" onclick="toggleDetails(this)">
+                <div class="product" onclick="toggleDetails(this)" tabindex="0" aria-label="12-Slot 480 Top-Loader Binder - $36.00, Pre-Order Available">
                     <div class="product-content">
                         <div class="no-image-placeholder">Image Coming Soon</div>
                         <h3>12-Slot 480 Top-Loader Binder</h3>
