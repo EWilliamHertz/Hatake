@@ -1,4 +1,43 @@
-<!DOCTYPE html>
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -106,7 +145,7 @@
                     </div>
                     <div class="details">
                         <h4>10x 130pt Top-Loader</h4>
-                       .ConcurrentModificationException: Protect your cards with our rigid 35pt top-loaders. Pack of 25, ideal for standard TCG cards. Available October 2025.</p>
+                        <p>Protect your cards with our rigid 130pt top-loaders. Pack of 10, ideal for thicker or premium TCG cards. Available October 2025.</p>
                         <form class="pre-order-form" data-name="10x 130pt Top-Loader" data-price="3.50">
                             <input type="email" class="pre-order-email" placeholder="Your email address" required>
                             <input type="number" class="pre-order-quantity" placeholder="Quantity (1-5)" min="1" max="5" required>
@@ -219,6 +258,97 @@
                 <button class="modal-button">Close</button>
             </div>
         </div>
+
+        <!-- Structured Data for Products -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "itemListElement": [
+                {
+                    "@type": "Product",
+                    "name": "Duffel Bag",
+                    "description": "Carry your TCG gear in style with our 47*28*55cm duffel bag. Durable, branded, and perfect for tournaments. Available July 2025.",
+                    "image": "https://i.imgur.com/xV7ikH1.jpg",
+                    "url": "https://ewilliamhertz.github.io/Hatake/shop.html#duffel-bag",
+                    "offers": {
+                        "@type": "Offer",
+                        "price": "30.00",
+                        "priceCurrency": "USD",
+                        "availability": "https://schema.org/PreOrder",
+                        "validFrom": "2025-04-24"
+                    }
+                },
+                {
+                    "@type": "Product",
+                    "name": "25x 35pt Top-Loader",
+                    "description": "Protect your cards with our rigid 35pt top-loaders. Pack of 25, ideal for standard TCG cards. Available October 2025.",
+                    "url": "https://ewilliamhertz.github.io/Hatake/shop.html#35pt-top-loader",
+                    "offers": {
+                        "@type": "Offer",
+                        "price": "3.00",
+                        "priceCurrency": "USD",
+                        "availability": "https://schema.org/PreOrder",
+                        "validFrom": "2025-04-24"
+                    }
+                },
+                {
+                    "@type": "Product",
+                    "name": "10x 130pt Top-Loader",
+                    "description": "Protect your cards with our rigid 130pt top-loaders. Pack of 10, ideal for thicker or premium TCG cards. Available October 2025.",
+                    "url": "https://ewilliamhertz.github.io/Hatake/shop.html#130pt-top-loader",
+                    "offers": {
+                        "@type": "Offer",
+                        "price": "3.50",
+                        "priceCurrency": "USD",
+                        "availability": "https://schema.org/PreOrder",
+                        "validFrom": "2025-04-24"
+                    }
+                },
+                {
+                    "@type": "Product",
+                    "name": "66*91 Matte Sleeves, Black",
+                    "description": "Premium black matte sleeves with a non-slip grip. Fits standard TCG cards (66x91mm), pack of 100. Available October 2025.",
+                    "image": "https://i.imgur.com/Kz10FCc.jpg",
+                    "url": "https://ewilliamhertz.github.io/Hatake/shop.html#matte-sleeves",
+                    "offers": {
+                        "@type": "Offer",
+                        "price": "8.90",
+                        "priceCurrency": "USD",
+                        "availability": "https://schema.org/PreOrder",
+                        "validFrom": "2025-04-24"
+                    }
+                },
+                {
+                    "@type": "Product",
+                    "name": "PU Deckbox (160+ Cards)",
+                    "description": "Store up to 160+ cards in our premium PU leather deckbox with magnetic closure and Hatake branding. Ideal for Commander decks. Available October 2025.",
+                    "image": "https://i.imgur.com/QFzheaZ.jpg",
+                    "url": "https://ewilliamhertz.github.io/Hatake/shop.html#deckbox",
+                    "offers": {
+                        "@type": "Offer",
+                        "price": "30.00",
+                        "priceCurrency": "USD",
+                        "availability": "https://schema.org/PreOrder",
+                        "validFrom": "2025-04-24"
+                    }
+                },
+                {
+                    "@type": "Product",
+                    "name": "12-Slot 480 Top-Loader Binder",
+                    "description": "Store up to 480 cards in our premium binder with side-loading pockets and a zipper. Branded and durable. Available October 2025.",
+                    "url": "https://ewilliamhertz.github.io/Hatake/shop.html#binder",
+                    "offers": {
+                        "@type": "Offer",
+                        "price": "36.00",
+                        "priceCurrency": "USD",
+                        "availability": "https://schema.org/PreOrder",
+                        "validFrom": "2025-04-24"
+                    }
+                }
+            ]
+        }
+        </script>
     </main>
 
     <footer>
