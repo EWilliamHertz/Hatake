@@ -1,4 +1,43 @@
-<!DOCTYPE html>
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -25,11 +64,6 @@
             <h2>Upcoming Events</h2>
             <p>Join us at these exciting events where we’ll showcase our premium TCG accessories and connect with the community!</p>
             <details>
-                <summary>SweCard Expo – Huskvarna, May 2025</summary>
-                <p>We’ll be attending SweCard, Sweden’s largest trading card expo, in Huskvarna at Folkets Park on May 17-18, 2025. Join us from 10:00–17:00 on Saturday and 10:00–15:00 on Sunday. Explore our matte sleeves, deckboxes, and more, and check out the trade zone and live box breaks. Free entry for all!</p>
-                <div class="countdown-timer" data-target="2025-05-17T10:00:00">Loading...</div>
-            </details>
-            <details>
                 <summary>Need to be Geek Convention – Skara, September 2025</summary>
                 <p>We’ll be at the Need to be Geek Convention in Skara at Multihallen on September 27, 2025. This geek culture event features everything from Pokémon and Star Wars to Warhammer and DnD. Stop by to see our premium TCG accessories, meet our team, and connect with fellow enthusiasts. Free entry! Learn more at <a href="https://needtobegeek.se/" target="_blank">needtobegeek.se</a>.</p>
                 <div class="countdown-timer" data-target="2025-09-27T11:00:00">Loading...</div>
@@ -48,11 +82,30 @@
     </main>
 
     <footer>
-        <p>© 2025 HatakeAB. All rights reserved. | <a href="invest.html">Invest</a></p>
+        <div class="footer-content">
+            <div>
+                <h4>Connect With Us</h4>
+                <ul>
+                    <li><a href="https://discord.gg/Puq5ncSbjt" target="_blank">Discord</a></li>
+                    <li><a href="https://www.facebook.com/groups/hatakecardshop" target="_blank">Facebook Group</a></li>
+                    <li><a href="https://www.facebook.com/HatakeCardShop/" target="_blank">Facebook Page</a></li>
+                    <li><a href="mailto:ewilliamhe@gmail.com">Email Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="invest.html">Invest</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="events.html">Events</a></li>
+                </ul>
+            </div>
+        </div>
         <div class="social-share">
             <p>Share Hatake TCG:</p>
             <a href="https://twitter.com/intent/tweet?text=Check%20out%20Hatake%20TCG%20-%20Premium%20TCG%20Accessories!%20https://ewilliamhertz.github.io/Hatake/" target="_blank" aria-label="Share on Twitter">Share on X</a>
         </div>
+        <p>© 2025 HatakeAB. All rights reserved.</p>
     </footer>
 
     <button id="back-to-top" aria-label="Back to Top">↑</button>
