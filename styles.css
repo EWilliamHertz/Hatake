@@ -11,7 +11,25 @@
     --button-hover-bg: #0056b3;
     --accent-color: #26A69A; /* Teal accent color for buttons and links */
 }
+/* Countdown Timer Styles */
+#countdown {
+    text-align: center;
+    padding: 2em;
+    background-color: var(--background-color);
+}
 
+#countdown h2 {
+    font-size: 1.8em;
+    margin-bottom: 0.5em;
+    color: var(--text-color);
+}
+
+#countdown-timer {
+    font-size: 2em;
+    font-weight: 600;
+    color: var(--accent-color);
+    letter-spacing: 2px;
+}
 [data-theme="dark"] {
     --background-color: #1a1a1a;
     --text-color: #e0e0e0;
