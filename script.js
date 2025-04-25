@@ -1,11 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Theme toggle functionality
+    // Theme toggle functionality with local storage
     const themeToggle = document.getElementById("theme-toggle");
     const body = document.body;
 
+    // Check for saved theme preference in local storage
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+        body.classList.add("dark-mode");
+        themeToggle.textContent = "☀️";
+    } else {
+        themeToggle.textContent = "🌙";
+    }
+
     themeToggle.addEventListener("click", () => {
         body.classList.toggle("dark-mode");
-        themeToggle.textContent = body.classList.contains("dark-mode") ? "☀️" : "🌙";
+        const isDarkMode = body.classList.contains("dark-mode");
+        themeToggle.textContent = isDarkMode ? "☀️" : "🌙";
+        // Save the theme preference to local storage
+        localStorage.setItem("theme", isDarkMode ? "dark" : "light");
     });
 
     // Back to top button functionality
