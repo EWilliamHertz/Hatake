@@ -44,12 +44,79 @@ document.addEventListener("DOMContentLoaded", () => {
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            document.getElementById("countdown-timer").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-            if (distance < 0) {
-                clearInterval(timer);
-                document.getElementById("countdown-timer").innerHTML = "Launched!";
+            const countdownElement = document.getElementById("countdown-timer");
+            if (countdownElement) {
+                countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                if (distance < 0) {
+                    clearInterval(timer);
+                    countdownElement.innerHTML = "Launched!";
+                }
             }
         }, 1000);
     }
     startCountdown();
+
+    // Search bar functionality
+    const searchBar = document.getElementById("search-bar");
+    const searchButton = document.getElementById("search-button");
+
+    function performSearch() {
+        const query = searchBar.value.trim().toLowerCase();
+        if (!query) {
+            alert("Please enter a search term.");
+            return;
+        }
+
+        // Define search mappings: keywords to page URLs
+        const searchMap = {
+            "sleeves": "shop.html",
+            "matte sleeves": "shop.html",
+            "top-loader": "shop.html",
+            "toploaders": "shop.html",
+            "deckbox": "shop.html",
+            "deckboxes": "shop.html",
+            "binder": "shop.html",
+            "duffel bag": "shop.html",
+            "duffel": "shop.html",
+            "shop": "shop.html",
+            "products": "shop.html",
+            "about": "about.html",
+            "story": "about.html",
+            "behind the scenes": "about.html",
+            "events": "events.html",
+            "mtg": "mtg.html",
+            "magic the gathering": "mtg.html",
+            "partner": "partner.html",
+            "press": "press-kit.html",
+            "press kit": "press-kit.html",
+            "contact": "about.html"
+        };
+
+        // Find a matching keyword
+        let redirectPage = "index.html"; // Default to homepage if no match
+        for (const keyword in searchMap) {
+            if (query.includes(keyword)) {
+                redirectPage = searchMap[keyword];
+                break;
+            }
+        }
+
+        // Redirect to the matched page
+        window.location.href = redirectPage;
+    }
+
+    // Handle search button click
+    if (searchButton) {
+        searchButton.addEventListener("click", performSearch);
+    }
+
+    // Handle Enter key press in search bar
+    if (searchBar) {
+        searchBar.addEventListener("keypress", (event) => {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                performSearch();
+            }
+        });
+    }
 });
