@@ -615,3 +615,45 @@ summary i {
         font-size: 0.8em;
     }
 }
+/* Search Bar Styles */
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+#search-bar {
+    padding: 0.5em;
+    border: 1px solid var(--text-color);
+    border-radius: 5px;
+    width: 150px;
+    transition: width 0.3s ease;
+}
+
+#search-bar:focus {
+    width: 200px;
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+#search-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+#search-button:hover {
+    color: var(--accent-color);
+}
+
+@media (max-width: 768px) {
+    #search-bar {
+        width: 120px;
+    }
+    #search-bar:focus {
+        width: 160px;
+    }
+}
