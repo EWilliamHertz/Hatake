@@ -657,3 +657,18 @@ summary i {
         width: 160px;
     }
 }
+#for-retailers table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 90%;
+    max-width: 800px;
+}
+#for-retailers th, #for-retailers td {
+    border: 1px solid var(--text-color);
+    padding: 0.5em;
+    text-align: center;
+}
+#for-retailers thead {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+}
