@@ -83,9 +83,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Start all countdowns
+    // Start all countdowns with a slight delay to ensure DOM is fully rendered
     try {
-        startCountdowns();
+        setTimeout(startCountdowns, 100); // Delay to handle nested elements
     } catch (error) {
         console.error("Error in startCountdowns:", error);
     }
