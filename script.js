@@ -99,19 +99,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const productGrid = document.querySelector(".product-grid");
 
     if (productSort && productGrid) {
-        // Store the original order of products
-        const originalProducts = Array.from(productGrid.children);
+        // Store the original order of products by cloning the nodes
+        const originalProducts = Array.from(productGrid.children).map(product => product.cloneNode(true));
 
         productSort.addEventListener("change", () => {
             console.log("Product sort changed to:", productSort.value);
             const sortValue = productSort.value;
 
             // Get all products as an array
-            let products = Array.from(productGrid.children);
+            let products = Array.from(productGrid.children).map(product => product.cloneNode(true));
 
             if (sortValue === "default") {
                 // Restore original order
-                products = originalProducts;
+                products = originalProducts.map(product => product.cloneNode(true));
             } else {
                 // Sort by price
                 products.sort((a, b) => {
@@ -125,6 +125,28 @@ document.addEventListener("DOMContentLoaded", () => {
             productGrid.innerHTML = "";
             products.forEach(product => productGrid.appendChild(product));
             console.log("Products sorted:", sortValue);
+
+            // Re-attach event listeners to the newly appended products
+            const newProducts = document.querySelectorAll(".product");
+            newProducts.forEach(product => {
+                product.addEventListener("click", () => toggleDetails(product));
+            });
         });
     }
+
+    // Toggle product details
+    window.toggleDetails = function(product) {
+        console.log("Toggling details for product:", product.querySelector("h3").textContent);
+        const isActive = product.classList.contains("active");
+        
+        // Close all other product details
+        document.querySelectorAll(".product").forEach(p => {
+            p.classList.remove("active");
+        });
+
+        // Toggle the clicked product
+        if (!isActive) {
+            product.classList.add("active");
+        }
+    };
 });
