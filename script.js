@@ -8,17 +8,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // Check for saved theme preference in local storage
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") {
-        body.classList.add("dark-mode");
+        body.setAttribute("data-theme", "dark");
         themeToggle.textContent = "☀️";
     } else {
+        body.setAttribute("data-theme", "light");
         themeToggle.textContent = "🌙";
     }
 
     themeToggle.addEventListener("click", () => {
-        body.classList.toggle("dark-mode");
-        const isDarkMode = body.classList.contains("dark-mode");
-        themeToggle.textContent = isDarkMode ? "☀️" : "🌙";
-        localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+        const currentTheme = body.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        body.setAttribute("data-theme", currentTheme);
+        themeToggle.textContent = currentTheme === "dark" ? "☀️" : "🌙";
+        localStorage.setItem("theme", currentTheme);
     });
 
     // Back to top button functionality
@@ -114,20 +115,36 @@ document.addEventListener("DOMContentLoaded", () => {
             "products": "shop.html",
             "about": "about.html",
             "story": "about.html",
-            "behind Commission's": "about.html",
+            "behind the scenes": "about.html",
             "events": "events.html",
             "mtg": "mtg.html",
             "magic the gathering": "mtg.html",
             "partner": "partner.html",
-            "press": "press-kit.html",
-            "press kit": "press-kit.html",
-            "contact": "about.html"
+            "invest": "partner.html",
+            "retailers": "partner.html"
         };
 
         let redirectPage = "index.html";
         for (const keyword in searchMap) {
             if (query.includes(keyword)) {
                 redirectPage = searchMap[keyword];
+                break;
+            }
+        }
+
+        // If no keyword match, search page content
+        const pages = [
+            { url: "index.html", keywords: ["home", "welcome", "pre-order", "testimonials"] },
+            { url: "shop.html", keywords: ["shop", "products", "sleeves", "deckbox", "binder", "duffel", "top-loader"] },
+            { url: "about.html", keywords: ["about", "story", "behind the scenes", "hatake tcg"] },
+            { url: "events.html", keywords: ["events", "convention", "launch party", "swecard"] },
+            { url: "mtg.html", keywords: ["mtg", "magic the gathering", "tournaments", "modern", "legacy"] },
+            { url: "partner.html", keywords: ["partner", "invest", "retailers", "sales"] }
+        ];
+
+        for (const page of pages) {
+            if (page.keywords.some(keyword => query.includes(keyword))) {
+                redirectPage = page.url;
                 break;
             }
         }
