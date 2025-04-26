@@ -56,12 +56,16 @@
     <img src="https://ewilliamhertz.github.io/Hatake/images/logo.png" alt="Hatake TCG Logo" class="logo">
     <nav class="header-nav">
         <a href="index.html">Home</a>
-        <a href="shop.html" class="active">Shop</a>
+         <a href="shop.html" class="active">Shop</a>
         <a href="about.html">About</a>
         <a href="events.html">Events</a>
         <a href="mtg.html">MTG</a>
         <a href="partner.html">Partner</a>
     </nav>
+    <div class="search-container">
+        <input type="text" id="search-bar" placeholder="Search Hatake TCG..." aria-label="Search Hatake TCG">
+        <button id="search-button" aria-label="Search">🔍</button>
+    </div>
     <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
 </header>
     <main style="text-align: center;">
@@ -74,6 +78,10 @@
                     <option value="price-low">Price: Low to High</option>
                     <option value="price-high">Price: High to Low</option>
                 </select>
+                <form id="search-form" class="search-form">
+                    <input type="text" id="product-search" placeholder="Search products...">
+                    <button type="submit" id="search-btn">Search</button>
+                </form>
             </div>
             <div class="product-grid">
                 <div class="product" onclick="toggleDetails(this)" tabindex="0" aria-label="Duffel Bag - $30.00, Pre-Order Available">
