@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+    console.log("DOM fully loaded, script.js running");
+
     // Theme toggle functionality with local storage
     const themeToggle = document.getElementById("theme-toggle");
     const body = document.body;
@@ -16,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
         body.classList.toggle("dark-mode");
         const isDarkMode = body.classList.contains("dark-mode");
         themeToggle.textContent = isDarkMode ? "☀️" : "🌙";
-        // Save the theme preference to local storage
         localStorage.setItem("theme", isDarkMode ? "dark" : "light");
     });
 
@@ -36,38 +37,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Countdown timer functionality for multiple timers
     function startCountdowns() {
-        // Select all elements with class 'countdown-timer'
+        console.log("startCountdowns function called");
         const timers = document.querySelectorAll(".countdown-timer");
+        console.log(`Found ${timers.length} countdown timers`);
 
-        timers.forEach(timer => {
-            // Get the target date from the data-target attribute
-            const targetDate = new Date(timer.getAttribute("data-target")).getTime();
+        if (timers.length === 0) {
+            console.error("No elements with class 'countdown-timer' found");
+            return;
+        }
 
-            // Start a countdown for this specific timer
+        timers.forEach((timer, index) => {
+            console.log(`Processing timer ${index + 1}`);
+            const targetDateStr = timer.getAttribute("data-target");
+            console.log(`Target date for timer ${index + 1}: ${targetDateStr}`);
+
+            // Validate the target date
+            const targetDate = new Date(targetDateStr).getTime();
+            if (isNaN(targetDate)) {
+                console.error(`Invalid date for timer ${index + 1}: ${targetDateStr}`);
+                timer.innerHTML = "Invalid Date";
+                return;
+            }
+
+            // Start countdown for this timer
             const interval = setInterval(() => {
                 const now = new Date().getTime();
                 const distance = targetDate - now;
 
-                // Calculate days, hours, minutes, seconds
+                if (distance < 0) {
+                    clearInterval(interval);
+                    timer.innerHTML = "Available Now!";
+                    console.log(`Timer ${index + 1} has finished`);
+                    return;
+                }
+
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                // Update the timer display
                 timer.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-
-                // If the countdown is finished, display a message
-                if (distance < 0) {
-                    clearInterval(interval);
-                    timer.innerHTML = "Available Now!";
-                }
+                console.log(`Timer ${index + 1} updated: ${days}d ${hours}h ${minutes}m ${seconds}s`);
             }, 1000);
         });
     }
 
     // Start all countdowns
-    startCountdowns();
+    try {
+        startCountdowns();
+    } catch (error) {
+        console.error("Error in startCountdowns:", error);
+    }
 
     // Search bar functionality
     const searchBar = document.getElementById("search-bar");
@@ -80,7 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // Define search mappings: keywords to page URLs
         const searchMap = {
             "sleeves": "shop.html",
             "matte sleeves": "shop.html",
@@ -95,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "products": "shop.html",
             "about": "about.html",
             "story": "about.html",
-            "behind the scenes": "about.html",
+            "behind Commission's": "about.html",
             "events": "events.html",
             "mtg": "mtg.html",
             "magic the gathering": "mtg.html",
@@ -105,8 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "contact": "about.html"
         };
 
-        // Find a matching keyword
-        let redirectPage = "index.html"; // Default to homepage if no match
+        let redirectPage = "index.html";
         for (const keyword in searchMap) {
             if (query.includes(keyword)) {
                 redirectPage = searchMap[keyword];
@@ -114,16 +132,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        // Redirect to the matched page
         window.location.href = redirectPage;
     }
 
-    // Handle search button click
     if (searchButton) {
         searchButton.addEventListener("click", performSearch);
     }
 
-    // Handle Enter key press in search bar
     if (searchBar) {
         searchBar.addEventListener("keypress", (event) => {
             if (event.key === "Enter") {
