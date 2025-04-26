@@ -1,74 +1,52 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hatake TCG - Magic: The Gathering Accessories</title>
-    <meta name="description" content="Explore Hatake TCG's premium accessories designed for Magic: The Gathering players, including deckboxes, sleeves, and binders.">
+    <meta name="description" content="Explore Hatake TCG's premium accessories for Magic: The Gathering players, launching in 2025.">
     <meta property="og:title" content="Hatake TCG - Magic: The Gathering Accessories">
-    <meta property="og:description" content="Premium Magic: The Gathering accessories by Hatake TCG for players and collectors.">
+    <meta property="og:description" content="Premium Magic: The Gathering accessories by Hatake TCG, launching in 2025.">
     <meta property="og:image" content="https://ewilliamhertz.github.io/Hatake/images/logo.png">
     <meta property="og:url" content="https://ewilliamhertz.github.io/Hatake/mtg.html">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <img src="https://ewilliamhertz.github.io/Hatake/images/logo.png" alt="Hatake TCG Logo" class="logo">
-        <nav class="header-nav">
-            <a href="index.html">Home</a>
-            <a href="shop.html">Shop</a>
-            <a href="about.html">About</a>
-            <a href="events.html">Events</a>
-            <a href="mtg.html" class="active">MTG</a>
-            <a href="partner.html">Partner</a>
-        </nav>
-        <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
-    </header>
-
+<header>
+    <img src="https://ewilliamhertz.github.io/Hatake/images/logo.png" alt="Hatake TCG Logo" class="logo">
+    <nav class="header-nav">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="about.html">About</a>
+        <a href="events.html">Events</a>
+        <a href="mtg.html" class="active">MTG</a>
+        <a href="partner.html">Partner</a>
+    </nav>
+    <div class="search-container">
+        <input type="text" id="search-bar" placeholder="Search Hatake TCG..." aria-label="Search Hatake TCG">
+        <button id="search-button" aria-label="Search">🔍</button>
+    </div>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+</header>
     <main style="text-align: center;">
-        <section id="mtg">
-            <h2>Magic: The Gathering Accessories</h2>
-            <p>Our accessories are perfect for Magic: The Gathering players. From deckboxes that hold 160+ cards (ideal for Commander decks) to premium matte sleeves and binders, we’ve got you covered.</p>
-            <p>Check out our <a href="shop.html">Shop</a> to pre-order your MTG gear today!</p>
+        <section id="mtg-content">
+            <h2>Magic: The Gathering Competitive Play</h2>
+            <details>
+                <summary>Read Ernst-William Hertz's Message</summary>
+                <p>In Magic the Gathering there is many different formats, and in order to play competitively you need to read the meta and find out what is going on.</p>
+                <p>On this section we would like to help out newcomers looking to step up their game and start playing competitively in tournaments by sending them over to <a href="http://www.mtgtop8.com" target="_blank">www.mtgtop8.com</a> to read how the meta looks in their beloved format, me, Ernst-William Hertz myself is a Modern and Legacy player.</p>
+                <p>In Modern I love to play Elf although it is a lower tier deck and in Legacy I love to play Goblins and Storm.</p>
+                <p>To net-deck a deck is what a commoner such as us should do in order to play the game competitively, 2023 I got back from my 6 years break and I immediately netdecked a food-chain goblin deck and a modern elf deck that both did well in tournaments. I inserted the deck-lists into MagicCardMarket’s shopping wizard and I ordered the decks home.</p>
+                <p>You should do the same—find out what format you want to play, check MTGTop8 for decks, find something competitive that you like and order the deck home at once.</p>
+            </details>
+
+            <h2>Upcoming Scandinavian Tournaments</h2>
+            <ul>
+                <li><strong>Danish Masters 2025</strong> - Copenhagen, Denmark - June 7-8, 2025</li>
+                <li><strong>Finnish Grand Prix 2025</strong> - Helsinki, Finland - April 5-6, 2025</li>
+                <li><strong>Norwegian Championship 2025</strong> - Oslo, Norway - May 10-11, 2025</li>
+                <li><strong>Swedish Open 2025</strong> - Stockholm, Sweden - March 15-16, 2025</li>
+            </ul>
         </section>
     </main>
 
