@@ -51,15 +51,15 @@ document.addEventListener("DOMContentLoaded", () => {
             const targetDateStr = timer.getAttribute("data-target");
             console.log(`Target date for timer ${index + 1}: ${targetDateStr}`);
 
-            // Validate the target date
             const targetDate = new Date(targetDateStr).getTime();
             if (isNaN(targetDate)) {
                 console.error(`Invalid date for timer ${index + 1}: ${targetDateStr}`);
-                timer.innerHTML = "Invalid Date";
+                timer.innerHTML = "Date Error";
                 return;
             }
 
-            // Start countdown for this timer
+            timer.innerHTML = "Starting...";
+
             const interval = setInterval(() => {
                 const now = new Date().getTime();
                 const distance = targetDate - now;
@@ -82,7 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Start all countdowns
     try {
         startCountdowns();
     } catch (error) {
@@ -93,8 +92,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchBar = document.getElementById("search-bar");
     const searchButton = document.getElementById("search-button");
 
+    console.log("Search bar element:", searchBar);
+    console.log("Search button element:", searchButton);
+
+    if (!searchBar || !searchButton) {
+        console.error("Search bar or button not found in the DOM");
+        return;
+    }
+
     function performSearch() {
+        console.log("performSearch function called");
         const query = searchBar.value.trim().toLowerCase();
+        console.log("Search query:", query);
+
         if (!query) {
             alert("Please enter a search term.");
             return;
@@ -114,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "products": "shop.html",
             "about": "about.html",
             "story": "about.html",
-            "behind Commission's": "about.html",
+            "behind the scenes": "about.html",
             "events": "events.html",
             "mtg": "mtg.html",
             "magic the gathering": "mtg.html",
@@ -128,23 +138,26 @@ document.addEventListener("DOMContentLoaded", () => {
         for (const keyword in searchMap) {
             if (query.includes(keyword)) {
                 redirectPage = searchMap[keyword];
+                console.log(`Match found for keyword "${keyword}", redirecting to ${redirectPage}`);
                 break;
             }
         }
 
+        console.log("Redirecting to:", redirectPage);
         window.location.href = redirectPage;
     }
 
-    if (searchButton) {
-        searchButton.addEventListener("click", performSearch);
-    }
+    searchButton.addEventListener("click", () => {
+        console.log("Search button clicked");
+        performSearch();
+    });
 
-    if (searchBar) {
-        searchBar.addEventListener("keypress", (event) => {
-            if (event.key === "Enter") {
-                event.preventDefault();
-                performSearch();
-            }
-        });
-    }
+    searchBar.addEventListener("keypress", (event) => {
+        console.log("Key pressed in search bar:", event.key);
+        if (event.key === "Enter") {
+            event.preventDefault();
+            console.log("Enter key pressed, performing search");
+            performSearch();
+        }
+    });
 });

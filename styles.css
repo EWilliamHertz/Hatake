@@ -9,27 +9,9 @@
     --link-color: #333;
     --button-bg: #007BFF;
     --button-hover-bg: #0056b3;
-    --accent-color: #26A69A; /* Teal accent color for buttons and links */
-}
-/* Countdown Timer Styles */
-#countdown {
-    text-align: center;
-    padding: 2em;
-    background-color: var(--background-color);
+    --accent-color: #26A69A;
 }
 
-#countdown h2 {
-    font-size: 1.8em;
-    margin-bottom: 0.5em;
-    color: var(--text-color);
-}
-
-#countdown-timer {
-    font-size: 2em;
-    font-weight: 600;
-    color: var(--accent-color);
-    letter-spacing: 2px;
-}
 [data-theme="dark"] {
     --background-color: #1a1a1a;
     --text-color: #e0e0e0;
@@ -37,22 +19,21 @@
     --footer-bg: #2c2c2c;
     --card-bg: #333;
     --link-color: #66b0ff;
-    --button-bg: #26A69A; /* Use teal in dark mode */
+    --button-bg: #26A69A;
     --button-hover-bg: #1c7a71;
-    --accent-color: #4DD0E1; /* Lighter teal for dark mode */
+    --accent-color: #4DD0E1;
 }
 
 body {
-    font-family: 'Poppins', Arial, sans-serif; /* Updated font */
+    font-family: 'Poppins', Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--background-color);
     color: var(--text-color);
     transition: background-color 0.3s, color 0.3s;
-    line-height: 1.6; /* Improved readability */
+    line-height: 1.6;
 }
 
-/* Updated header with gradient background and card pattern */
 header {
     background: linear-gradient(135deg, #1E3A8A 0%, #60A5FA 100%);
     position: relative;
@@ -64,10 +45,9 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Retained shadow */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* Card pattern overlay using pseudo-elements */
 header::before {
     content: '';
     position: absolute;
@@ -80,7 +60,6 @@ header::before {
     z-index: 0;
 }
 
-/* Larger logo with animation, replacing .small-logo */
 .logo {
     width: 150px;
     height: auto;
@@ -89,7 +68,6 @@ header::before {
     z-index: 1;
 }
 
-/* Glow animation for the logo */
 @keyframes glow {
     0% {
         box-shadow: 0 0 5px rgba(94, 165, 250, 0.5);
@@ -102,34 +80,33 @@ header::before {
     }
 }
 
-/* Updated navigation styles */
 nav.header-nav {
-    margin-top: 0; /* Removed margin-top since flexbox centers it */
+    margin-top: 0;
     position: relative;
     z-index: 1;
 }
 
 nav.header-nav a {
-    color: #ffffff; /* White for readability against gradient background */
-    margin: 0 1.2em; /* Slightly more spacing */
+    color: #ffffff;
+    margin: 0 1.2em;
     text-decoration: none;
-    font-weight: 600; /* Bolder nav links */
-    transition: color 0.3s, transform 0.3s; /* Smooth hover effects */
+    font-weight: 600;
+    transition: color 0.3s, transform 0.3s;
 }
 
 nav.header-nav a:hover {
-    color: var(--accent-color); /* Teal on hover */
-    transform: scale(1.05); /* Slight scale-up on hover */
+    color: var(--accent-color);
+    transform: scale(1.05);
 }
 
 nav.header-nav a.active {
     font-weight: 600;
-    color: var(--accent-color); /* Highlight active page with teal */
-    border-bottom: 2px solid var(--accent-color); /* Underline active link */
+    color: var(--accent-color);
+    border-bottom: 2px solid var(--accent-color);
 }
 
 #theme-toggle {
-    position: relative; /* Changed from absolute to work with flexbox */
+    position: relative;
     background: none;
     border: none;
     font-size: 1.5em;
@@ -139,7 +116,7 @@ nav.header-nav a.active {
 }
 
 #theme-toggle:hover {
-    transform: rotate(20deg); /* Fun hover effect */
+    transform: rotate(20deg);
 }
 
 main {
@@ -150,12 +127,12 @@ main {
 }
 
 section {
-    margin-bottom: 3em; /* More spacing between sections */
+    margin-bottom: 3em;
 }
 
 h2 {
     color: var(--text-color);
-    font-size: 2.2em; /* Larger headings */
+    font-size: 2.2em;
     font-weight: 600;
     margin-bottom: 0.5em;
 }
@@ -167,33 +144,33 @@ h3 {
 
 .cta-button {
     display: inline-block;
-    padding: 0.75em 1.5em; /* Larger buttons */
-    background: linear-gradient(45deg, var(--button-bg), var(--accent-color)); /* Gradient background */
+    padding: 0.75em 1.5em;
+    background: linear-gradient(45deg, var(--button-bg), var(--accent-color));
     color: white;
     text-decoration: none;
-    border-radius: 8px; /* More rounded */
+    border-radius: 8px;
     font-weight: 600;
     transition: background 0.3s, transform 0.3s;
 }
 
 .cta-button:hover {
     background: linear-gradient(45deg, var(--button-hover-bg), var(--accent-color));
-    transform: translateY(-2px); /* Lift on hover */
+    transform: translateY(-2px);
 }
 
 footer {
     background-color: var(--footer-bg);
     color: var(--text-color);
     text-align: center;
-    padding: 2em 0; /* More padding */
+    padding: 2em 0;
     position: relative;
     bottom: 0;
     width: 100%;
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
 }
 
 footer a {
-    color: var(--accent-color); /* Teal links */
+    color: var(--accent-color);
     text-decoration: none;
     transition: color 0.3s;
 }
@@ -269,7 +246,7 @@ footer a:hover {
 
 #back-to-top:hover {
     background-color: var(--button-hover-bg);
-    transform: scale(1.1); /* Slight scale-up on hover */
+    transform: scale(1.1);
 }
 
 #product-controls {
@@ -317,22 +294,22 @@ footer a:hover {
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2em; /* More spacing */
+    gap: 2em;
 }
 
 .product {
     background-color: var(--card-bg);
-    padding: 1.5em; /* More padding */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Softer shadow */
+    padding: 1.5em;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     cursor: pointer;
     position: relative;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .product:hover {
-    transform: scale(1.05); /* Scale-up on hover */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* Stronger shadow on hover */
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .product img {
@@ -489,12 +466,12 @@ details {
 }
 
 details:hover {
-    background-color: #f0f0f0; /* Light hover effect */
+    background-color: #f0f0f0;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 [data-theme="dark"] details:hover {
-    background-color: #3a3a3a; /* Dark mode hover effect */
+    background-color: #3a3a3a;
 }
 
 summary {
@@ -509,7 +486,6 @@ summary i {
     color: var(--accent-color);
 }
 
-/* Style for map links on events page */
 .map-link {
     color: var(--accent-color);
     text-decoration: none;
@@ -520,7 +496,6 @@ summary i {
     text-decoration: underline;
 }
 
-/* Pre-Order Progress Section */
 #preorder-progress {
     text-align: center;
     margin-bottom: 3em;
@@ -561,7 +536,6 @@ summary i {
     color: #fff;
 }
 
-/* Mobile-specific styles */
 @media (max-width: 600px) {
     .product-grid {
         grid-template-columns: 1fr;
@@ -615,7 +589,7 @@ summary i {
         font-size: 0.8em;
     }
 }
-/* Search Bar Styles */
+
 .search-container {
     display: flex;
     align-items: center;
@@ -657,17 +631,20 @@ summary i {
         width: 160px;
     }
 }
+
 #for-retailers table {
     margin: 0 auto;
     border-collapse: collapse;
     width: 90%;
     max-width: 800px;
 }
+
 #for-retailers th, #for-retailers td {
     border: 1px solid var(--text-color);
     padding: 0.5em;
     text-align: center;
 }
+
 #for-retailers thead {
     background-color: var(--accent-color);
     color: var(--background-color);
