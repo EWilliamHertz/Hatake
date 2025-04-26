@@ -42,145 +42,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hatake TCG Events</title>
-    <meta name="description" content="Join Hatake TCG at events across Sweden and Denmark. Find us in Ystad, Malmö, Falköping, and Esbjerg in 2025.">
-    <meta property="og:title" content="Hatake TCG Events">
-    <meta property="og:description" content="Join Hatake TCG at events in Sweden and Denmark in 2025.">
+    <title>Hatake TCG Events - Tournaments & Meetups</title>
+    <meta name="description" content="Join Hatake TCG events, including tournaments and community meetups for trading card enthusiasts.">
+    <meta property="og:title" content="Hatake TCG Events - Tournaments & Meetups">
+    <meta property="og:description" content="Participate in Hatake TCG's exciting events and tournaments for the TCG community.">
     <meta property="og:image" content="https://ewilliamhertz.github.io/Hatake/images/logo.png">
     <meta property="og:url" content="https://ewilliamhertz.github.io/Hatake/events.html">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-        <header>
-    <img src="https://ewilliamhertz.github.io/Hatake/images/logo.png" alt="Hatake TCG Logo" class="logo">
-    <nav class="header-nav">
-        <a href="index.html">Home</a>
-        <a href="shop.html">Shop</a>
-        <a href="about.html">About</a>
-     <a href="events.html" class="active">Events</a>
-        <a href="mtg.html">MTG</a>
-        <a href="partner.html">Partner</a>
-    </nav>
-    <div class="search-container">
-        <input type="text" id="search-bar" placeholder="Search Hatake TCG..." aria-label="Search Hatake TCG">
-        <button id="search-button" aria-label="Search">🔍</button>
-    </div>
-    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
-</header>
-    <main style="text-align: center;">
-        <section id="upcoming-events">
-            <h2>Upcoming Events</h2>
-            <p>Join us at these exciting events where we’ll showcase our premium TCG accessories and connect with the community!</p>
-            <details>
-                <summary><i class="fa fa-calendar-alt"></i> Need to be Geek Convention – Skara, September 2025</summary>
-                <p>We’ll be at the Need to be Geek Convention in Skara at Multihallen on September 27, 2025. This geek culture event features everything from Pokémon and Star Wars to Warhammer and DnD. Stop by to see our premium TCG accessories, meet our team, and connect with fellow enthusiasts. Free entry! Learn more at <a href="https://needtobegeek.se/" target="_blank">needtobegeek.se</a>.</p>
-                <p><a href="https://maps.app.goo.gl/KmYvW5k7zXvZ8qL96" target="_blank" class="map-link">View Multihallen, Skara on Google Maps</a></p>
-                <div class="countdown-timer" data-target="2025-09-27T11:00:00">Loading...</div>
-            </details>
-            <details>
-                <summary><i class="fa fa-calendar-alt"></i> SweCard Expo – Svedala, October 2025</summary>
-                <p>Join us at SweCard in Svedala, just 20 minutes from Malmö, on October 11, 2025. We’ll be showcasing our full range of TCG accessories alongside international exhibitors like LetsCollect Cards from Denmark. A great opportunity to explore our products and connect with the TCG community!</p>
-                <p><a href="https://maps.app.goo.gl/6zYvW5k7zXvZ8qL97" target="_blank" class="map-link">View Svedala on Google Maps</a></p>
-                <div class="countdown-timer" data-target="2025-10-11T10:00:00">Loading...</div>
-            </details>
-            <details>
-                <summary><i class="fa fa-calendar-alt"></i> Hatake TCG Launch Party – Falköping, October 15, 2025</summary>
-                <p>Celebrate our official launch with us in Falköping on October 15, 2025! We’ll have exclusive pre-order pickups, live demos of our products, and a mini-tournament for attendees.</p>
-                <p><a href="https://maps.app.goo.gl/9zYvW5k7zXvZ8qL98" target="_blank" class="map-link">View Falköping on Google Maps</a></p>
-                <div class="countdown-timer" data-target="2025-10-15T12:00:00">Loading...</div>
-            </details>
-        </section>
+    <header>
+        <img src="https://ewilliamhertz.github.io/Hatake/images/logo.png" alt="Hatake TCG Logo" class="logo">
+        <nav class="header-nav">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="about.html">About</a>
+            <a href="events.html" class="active">Events</a>
+            <a href="mtg.html">MTG</a>
+            <a href="partner.html">Partner</a>
+        </nav>
+        <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+    </header>
 
-        <!-- Structured Data for Events -->
-        <script type="application/ld+json">
-        [
-            {
-                "@context": "https://schema.org",
-                "@type": "Event",
-                "name": "Need to be Geek Convention",
-                "description": "A geek culture event featuring Pokémon, Star Wars, Warhammer, and DnD. Hatake TCG will showcase premium TCG accessories.",
-                "startDate": "2025-09-27T11:00:00+02:00",
-                "endDate": "2025-09-27T17:00:00+02:00",
-                "location": {
-                    "@type": "Place",
-                    "name": "Multihallen",
-                    "address": {
-                        "@type": "PostalAddress",
-                        "addressLocality": "Skara",
-                        "addressCountry": "SE"
-                    }
-                },
-                "organizer": {
-                    "@type": "Organization",
-                    "name": "Need to be Geek",
-                    "url": "https://needtobegeek.se/"
-                },
-                "performer": {
-                    "@type": "Organization",
-                    "name": "Hatake TCG",
-                    "url": "https://ewilliamhertz.github.io/Hatake/"
-                },
-                "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-                "eventStatus": "https://schema.org/EventScheduled",
-                "url": "https://ewilliamhertz.github.io/Hatake/events.html#need-to-be-geek"
-            },
-            {
-                "@context": "https://schema.org",
-                "@type": "Event",
-                "name": "SweCard Expo",
-                "description": "Hatake TCG will showcase its full range of TCG accessories alongside international exhibitors like LetsCollect Cards from Denmark.",
-                "startDate": "2025-10-11T10:00:00+02:00",
-                "endDate": "2025-10-11T16:00:00+02:00",
-                "location": {
-                    "@type": "Place",
-                    "name": "SweCard Expo Venue",
-                    "address": {
-                        "@type": "PostalAddress",
-                        "addressLocality": "Svedala",
-                        "addressCountry": "SE"
-                    }
-                },
-                "organizer": {
-                    "@type": "Organization",
-                    "name": "SweCard Expo",
-                    "url": "https://ewilliamhertz.github.io/Hatake/"
-                },
-                "performer": {
-                    "@type": "Organization",
-                    "name": "Hatake TCG",
-                    "url": "https://ewilliamhertz.github.io/Hatake/"
-                },
-                "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-                "eventStatus": "https://schema.org/EventScheduled",
-                "url": "https://ewilliamhertz.github.io/Hatake/events.html#swecard-expo"
-            },
-            {
-                "@context": "https://schema.org",
-                "@type": "Event",
-                "name": "Hatake TCG Launch Party",
-                "description": "Celebrate the official launch of Hatake TCG with exclusive pre-order pickups, live demos, and a mini-tournament.",
-                "startDate": "2025-10-15T12:00:00+02:00",
-                "endDate": "2025-10-15T18:00:00+02:00",
-                "location": {
-                    "@type": "Place",
-                    "name": "Hatake TCG Launch Venue",
-                    "address": {
-                        "@type": "PostalAddress",
-                        "addressLocality": "Falköping",
-                        "addressCountry": "SE"
-                    }
-                },
-                "organizer": {
-                    "@type": "Organization",
-                    "name": "Hatake TCG",
-                    "url": "https://ewilliamhertz.github.io/Hatake/"
-                },
-                "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-                "eventStatus": "https://schema.org/EventScheduled",
-                "url": "https://ewilliamhertz.github.io/Hatake/events.html#hatake-launch"
-            }
-        ]
-        </script>
+    <main style="text-align: center;">
+        <section id="events">
+            <h2>Upcoming Events</h2>
+            <p>Join us for exciting tournaments and community meetups! Check back for updates on our 2025 event schedule.</p>
+            <p><a href="https://www.google.com/maps/place/Stockholm" target="_blank" class="map-link">Stockholm, Sweden</a> - July 2025 (TBA)</p>
+        </section>
     </main>
 
     <footer>

@@ -7,18 +7,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Check for saved theme preference in local storage
     const savedTheme = localStorage.getItem("theme");
+    console.log("Saved theme from localStorage:", savedTheme);
     if (savedTheme === "dark") {
         body.classList.add("dark-mode");
         themeToggle.textContent = "☀️";
+        console.log("Applied dark mode on page load");
     } else {
+        body.classList.remove("dark-mode");
         themeToggle.textContent = "🌙";
+        console.log("Applied light mode on page load");
     }
 
     themeToggle.addEventListener("click", () => {
+        console.log("Theme toggle clicked");
         body.classList.toggle("dark-mode");
         const isDarkMode = body.classList.contains("dark-mode");
         themeToggle.textContent = isDarkMode ? "☀️" : "🌙";
         localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+        console.log("Theme set to:", isDarkMode ? "dark" : "light");
     });
 
     // Back to top button functionality
@@ -88,76 +94,37 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Error in startCountdowns:", error);
     }
 
-    // Search bar functionality
-    const searchBar = document.getElementById("search-bar");
-    const searchButton = document.getElementById("search-button");
+    // Product sorting functionality
+    const productSort = document.getElementById("product-sort");
+    const productGrid = document.querySelector(".product-grid");
 
-    console.log("Search bar element:", searchBar);
-    console.log("Search button element:", searchButton);
+    if (productSort && productGrid) {
+        // Store the original order of products
+        const originalProducts = Array.from(productGrid.children);
 
-    if (!searchBar || !searchButton) {
-        console.error("Search bar or button not found in the DOM");
-        return;
-    }
+        productSort.addEventListener("change", () => {
+            console.log("Product sort changed to:", productSort.value);
+            const sortValue = productSort.value;
 
-    function performSearch() {
-        console.log("performSearch function called");
-        const query = searchBar.value.trim().toLowerCase();
-        console.log("Search query:", query);
+            // Get all products as an array
+            let products = Array.from(productGrid.children);
 
-        if (!query) {
-            alert("Please enter a search term.");
-            return;
-        }
-
-        const searchMap = {
-            "sleeves": "shop.html",
-            "matte sleeves": "shop.html",
-            "top-loader": "shop.html",
-            "toploaders": "shop.html",
-            "deckbox": "shop.html",
-            "deckboxes": "shop.html",
-            "binder": "shop.html",
-            "duffel bag": "shop.html",
-            "duffel": "shop.html",
-            "shop": "shop.html",
-            "products": "shop.html",
-            "about": "about.html",
-            "story": "about.html",
-            "behind the scenes": "about.html",
-            "events": "events.html",
-            "mtg": "mtg.html",
-            "magic the gathering": "mtg.html",
-            "partner": "partner.html",
-            "press": "press-kit.html",
-            "press kit": "press-kit.html",
-            "contact": "about.html"
-        };
-
-        let redirectPage = "index.html";
-        for (const keyword in searchMap) {
-            if (query.includes(keyword)) {
-                redirectPage = searchMap[keyword];
-                console.log(`Match found for keyword "${keyword}", redirecting to ${redirectPage}`);
-                break;
+            if (sortValue === "default") {
+                // Restore original order
+                products = originalProducts;
+            } else {
+                // Sort by price
+                products.sort((a, b) => {
+                    const priceA = parseFloat(a.querySelector("p").textContent.replace("$", ""));
+                    const priceB = parseFloat(b.querySelector("p").textContent.replace("$", ""));
+                    return sortValue === "price-low" ? priceA - priceB : priceB - priceA;
+                });
             }
-        }
 
-        console.log("Redirecting to:", redirectPage);
-        window.location.href = redirectPage;
+            // Clear the grid and re-append sorted products
+            productGrid.innerHTML = "";
+            products.forEach(product => productGrid.appendChild(product));
+            console.log("Products sorted:", sortValue);
+        });
     }
-
-    searchButton.addEventListener("click", () => {
-        console.log("Search button clicked");
-        performSearch();
-    });
-
-    searchBar.addEventListener("keypress", (event) => {
-        console.log("Key pressed in search bar:", event.key);
-        if (event.key === "Enter") {
-            event.preventDefault();
-            console.log("Enter key pressed, performing search");
-            performSearch();
-        }
-    });
 });
