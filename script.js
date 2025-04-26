@@ -34,27 +34,40 @@ document.addEventListener("DOMContentLoaded", () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    // Countdown timer functionality
-    function startCountdown() {
-        const countdownDate = new Date("Oct 15, 2025 00:00:00").getTime();
-        const timer = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = countdownDate - now;
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            const countdownElement = document.getElementById("countdown-timer");
-            if (countdownElement) {
-                countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    // Countdown timer functionality for multiple timers
+    function startCountdowns() {
+        // Select all elements with class 'countdown-timer'
+        const timers = document.querySelectorAll(".countdown-timer");
+
+        timers.forEach(timer => {
+            // Get the target date from the data-target attribute
+            const targetDate = new Date(timer.getAttribute("data-target")).getTime();
+
+            // Start a countdown for this specific timer
+            const interval = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+
+                // Calculate days, hours, minutes, seconds
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Update the timer display
+                timer.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+                // If the countdown is finished, display a message
                 if (distance < 0) {
-                    clearInterval(timer);
-                    countdownElement.innerHTML = "Launched!";
+                    clearInterval(interval);
+                    timer.innerHTML = "Available Now!";
                 }
-            }
-        }, 1000);
+            }, 1000);
+        });
     }
-    startCountdown();
+
+    // Start all countdowns
+    startCountdowns();
 
     // Search bar functionality
     const searchBar = document.getElementById("search-bar");
